@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <ReduxProvider>
         <html lang="en">
-          <body className={inter.className}><NextTopLoader color='#9747ff' showSpinner={false}/>{children}</body>
+          <body className={inter.className}><NextTopLoader color='var(--pink)' showSpinner={false}/>{children}</body>
         </html>
     </ReduxProvider>
   )
