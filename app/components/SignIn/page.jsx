@@ -48,7 +48,7 @@ export default function SignIn(){
         <>
         {loadeer?<Loader/>:""}
         <div className="min-h-screen w-full flex items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
-            <div className={`bg-white p-6 py-10 flex`} style={{borderRadius:"20px",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)"}}>
+            <div className={`bg-white p-6 py-16 flex`} style={{borderRadius:"20px",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)"}}>
                 <div style={{minWidth:"30em",minHeight:"20em"}}>
 
                 </div>

@@ -1,0 +1,17 @@
+.logoImg{
+    width: 14em;
+    height: 14em;
+}
+.logoCon{
+    background-color: var(--lightpink);
+    width: 75%;
+    border-radius: 20px 0 0 20px;
+}
+.icon{
+    width: 12px;
+    height: 12px;
+}
+.rectImg{
+    width: 500px;
+    margin-bottom: .5em;
+}

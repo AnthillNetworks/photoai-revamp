@@ -23,6 +23,8 @@ html, body{
   --white: rgba(255, 255, 255, 1);
   --pink: rgba(236, 34, 101, 1);
   --black: #000;
+  --lightpink: #FFEAF1;
+  --darkblue: #4F55C3;
 }
 
 h1{
