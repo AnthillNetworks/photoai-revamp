@@ -1,0 +1,53 @@
+.QrCodeGen{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.QrCodeGen > div{
+    width: 70vw;
+    height: 80vh;
+    background-color: var(--white);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.QrCodeGen > div > div:nth-child(1){
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2vw;
+}
+.QrCodeGen > div > div:nth-child(2){
+    padding: 2vw;
+    background-color: white;
+    border-radius: 20px;
+}
+.downbtn {
+    background-color: var(--pink);
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 4px 6em;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 17px;
+}
+@media screen and (min-width: 0px) and (max-width: 800px) {
+    .QrCodeGen > div{
+        width: 80vw;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 600px) {
+    .QrCodeGen > div{
+        width: 90vw;
+        height: 60vh;
+    }
+    .QrCodeGen{
+        height: 80vh;
+    }
+}
