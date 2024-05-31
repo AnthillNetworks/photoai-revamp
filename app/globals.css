@@ -57,3 +57,12 @@ h3 {
   outline: none;
   padding: .25em .5em !important;
 }
+
+.css-1ps6pg7-MuiPaper-root *{
+  background: none !important;
+  color: rgba(133, 131, 131, 1);
+}
+
+.css-1ps6pg7-MuiPaper-root{
+  margin-top: 3.5em !important;
+}

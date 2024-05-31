@@ -1,0 +1,53 @@
+.sideBar{
+    width: 20em;
+}
+.selected {
+    background-color: #177BE5;
+    color: white;
+    padding: .5em 2em;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.unselected {
+    background-color: rgba(23, 123, 229,50%);
+    color: white;
+    padding: .5em 2em;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: none;
+}
+.profile{
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.searchResDiv{
+    padding: .5em 2em;
+    box-shadow: 0px 2px 2px 0px;
+    border-radius: 5px;
+    width: fit-content;
+    color: rgba(133, 131, 131, 1);
+    border: 1px solid white;
+}
+
+.popperDiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResDiv * {
+    font-size: 15px;
+    width: 6em;
+}
+
+.searchResDiv:hover {
+    border: 1px solid #177BE5;
+}
+
+.searchbtn{
+    color: white;
+    background-color: #177BE5;
+    padding: .3em .8em;
+    border-radius: 5px;
+}

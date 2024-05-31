@@ -1,0 +1,285 @@
+.NavSearchModel{
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0;
+    width: 100%;
+}
+.NavSearchModel > div:nth-child(1){
+    color: white;
+    font-size: 50px;
+    font-weight: bolder;
+}
+.NavSearchModel > div:nth-child(2){
+    height: min-content;
+}
+.ForBackButton{
+    background-color: #ffffff0f;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.DrawerCenter{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+}
+.SearchModel{
+    background-color: #1E2742;
+    border-radius: 25px;
+    width: 45vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .SearchModel > input{
+    background-color: #1E2742;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    text-align: center;
+    padding: 1vw;
+    color: white;
+    outline: none;
+  }
+  .NavSearchModel > div > img{
+    cursor: pointer;
+    margin: 5px;
+    width: 50px;
+    height: auto;
+  }
+  .TableTag{
+    display: flex;
+    justify-content: center;
+  }
+  .TableTag > table > thead > tr > th{
+    color: white;
+    min-width: 120px;
+  }
+  .TableTag > table > tbody > tr > td:nth-child(1){
+    color: #9747FF;
+    text-align: center;
+    text-decoration: underline;
+  }
+  .inputcontainer {
+    position: relative;
+    margin-right: 5vw;
+  }
+  .inputcontainer .input {
+    width: 100%;
+    padding: 15px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.473);
+    background-color: transparent;
+    border-radius: 5px;
+  }
+  .inputcontainer .label {
+    position: absolute;
+    top: -25px;
+    color: white;
+    left: 0;
+    background-color: #ffffff00;
+    padding: 0 5px;
+  }
+  .inputcontainer .input:focus {
+    outline: none;
+  }
+  
+  .ReportLeftDrawer{
+    display:'flex';
+    background-color: #1E2742;
+    flex-direction: 'column';
+    width: 80vw;
+    margin-top: 2vw;
+    margin-left: 10vw;
+    border-radius: 10px;
+  }
+  .ReportLeftDrawer > div{
+    color: white;
+  }
+  .Reports{
+    font-size: 2vw;
+    margin: 2vw 0 3vw 1vw;
+  }
+  .ReportsFilters{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .PieChartCss{
+    width: 250px;
+    margin: 5vw 10vw;
+  }
+  .PieChartCssFlex{
+    display: flex;
+  }
+  .ProgressFlex{
+    display: flex;
+    align-items: center;
+  }
+  .PieChartCssPrice{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .CustomerName{
+    font-size: 2vw;
+    padding: 2vw 0 1vw 1vw;
+    border-bottom: 1px solid #1e2742;
+  }
+  .CustomerDiv{
+    width: 94%;
+    margin: 3%;
+    background-color: #2d3a63;
+    border-radius: 20px;
+  }
+  .DrawerCenterDivDiv{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+  }
+  .AddCustomerStyle{
+    margin: 20px;
+    padding: 10px 40px;
+    background-color: #a240e5;
+    font-size: 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+  }
+  .AddModelButton{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15vw;
+  }
+  .FooterButton{
+    max-width: 50vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .FooterButton > button{
+    padding:0px 20px;
+  }
+  .inputcontainerFilter{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15vw;
+  }
+  .inputcontainerFilters{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10vw;
+    align-items: center;
+  }
+  .inputcontainerFilters > div:nth-child(1){
+    font-size: 2vw;
+  }
+  .inputcontainerFilters > div:nth-child(4) > img{
+    width: 4vw;
+  }
+  .ReportsFilters{
+    display: flex;
+  }
+  .DrawermapdataCenter{
+    display: flex;
+  }
+  @media screen and (min-width: 0px) and (max-width: 600px) {
+    .TableTag{
+      overflow: auto;
+      justify-content: flex-start;
+      width: 100vw;
+    }
+    .DrawermapdataCenter{
+      flex-direction: column;
+    }
+    .SearchModel{
+      width: 70vw;
+    }
+    .AddCustomerStyle{
+      padding: 5px 10px;
+    }
+    .AddModelButton{
+      margin-right: 0vw;
+    }
+    .FooterButton{
+      max-width: 70vw;
+    }
+    .FooterButton > button{
+      padding: 0;
+      margin: 1px;
+    }
+    .inputcontainerFilter{
+      display: grid;
+      margin: 0;
+      grid-template-columns: repeat(2,1fr);
+    }
+    .inputcontainerFilters{
+      margin: 0;
+      display: grid;
+    }
+    .inputcontainerFilters > div:nth-child(1){
+      margin-top: 5px;
+      font-size: 25px;
+    }
+    .inputcontainerFilters > div:nth-child(2){
+      margin-top: 35px;
+    }
+    .inputcontainerFilters > div:nth-child(3){
+      margin-top: 35px;
+    }
+    .inputcontainerFilters > div:nth-child(4){
+      margin-top: 10px;
+    }
+    .inputcontainerFilters > div:nth-child(4) > img{
+      width: 15vw;
+    }
+    .ReportLeftDrawer{
+      margin-left: 0;
+      width: 100vw;
+    }
+    .ReportsFilters{
+      width: 100vw;
+      display: grid;
+    }
+    .inputcontainer{
+      margin-top: 50px;
+    }
+    .ReportsFilters > div{
+      width: 95vw;
+    }
+    .PieChartCssFlex{
+      flex-direction: column;
+    }
+    .ProgressFlex > div > span{
+      width: 50vw!important;
+    }
+    .PieChartCssPrice{
+      margin: 10px;
+    }
+    .PieChartCssPrice > div{
+      margin: 20px 0;
+    }
+    .Reports{
+      font-size: 5vw;
+    }
+    .CustomerName{
+      font-size: 5vw;
+    }
+  }
+
+
+.ContainerTable{
+  max-height: 60vh;
+  overflow: scroll;
+}
+
+.toastDiv{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
