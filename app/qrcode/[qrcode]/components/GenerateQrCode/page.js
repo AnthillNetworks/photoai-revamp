@@ -1,9 +1,24 @@
 'use client'
-import React from 'react';
+import React, { useRef } from 'react';
 import Styles from "./page.module.css"
 import { QRCodeSVG } from 'qrcode.react';
 
 function QrCodeGen({EventName}) {
+  const qrCodeRef = useRef(null);
+    const downloadQRCode = () => {
+      const svg = qrCodeRef.current.querySelector('svg');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'qr-code.svg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
   return (
     <div className={Styles.QrCodeGen}>
             <div>

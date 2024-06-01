@@ -439,114 +439,205 @@ export default function Search({ AllEventData, SuperAdmin }) {
       {/* rewrite */}
       <div className="bg-white">
         <ToastContainer className={Styles.toastDiv}/>
-        <div className="flex w-full">
-          <div className={`${Styles.sideBar} flex flex-col gap-4 px-6 py-4 w-fit items-center`}>
-              <div className="mt-6">
-                  <Image src="/assets/logorect.svg" alt="Logo" width={100} height={100} className={Styles.logoImg} />
-              </div>
-              <div className="flex flex-col gap-3 mt-8">
-              {buttons.map((button) => (
-                  <button key={button.id} className={selectedOption ? `${Styles.selected}` : `${Styles.unselected}`} onClick={() => handleClick(button.id)}>
-                      {button.label}
-                  </button>
-                  ))}
-                  {SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>}
-              </div>
-          </div>
-          <div className="min-h-screen w-full" style={{backgroundColor:"var(--bg)"}}>
-            <div className="flex w-full items-center justify-between py-9 px-10">
-                <div className="text-2xl" style={{color:"var(--blue)"}}>Events</div>
-                <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
-            </div>
-            <div className="flex items-center w-full"> 
-              <div className={`${Styles.inpDiv} flex items-center w-full`}>
-               <input
-               id={Styles.input}
-               type="text"
-               value={searchValue}
-               style={{margin:"0 2em 0 2em",width:"50%",borderRadius:"10px",padding:".4em .8em",border:"none",outline:"none"}}
-               onChange={handleSearchInputChange}
-               onFocus={(e) => {
-                   setAnchorEl(e.currentTarget);
-                   setOpen(true);
-               }}
-               onBlur={() => {
-                   setOpen(false);
-               }}
-               placeholder="Search Event"
-               />
-               <div>
-               <button
-                   className={Styles.searchbtn}
-                   onClick={handleSearch}
-               >
-                   Search
-               </button>
-               </div>
-           </div>
-         </div>
-         <div>
           {
-            open ? 
-            <>
-              <div>
-                <div className={`flex gap-4 items-center mt-2 bg-white ml-8 mb-4 ${Styles.searchResDiv}`}>
-                  <div style={{width:"3em"}}>#</div>
-                  <div>Event name</div>
-                  <div>Date</div>
-                  <div>Location</div>
+            searchPage ? 
+            <div className="flex w-full">
+              <div className={`${Styles.sideBar} flex flex-col gap-4 px-6 py-4 w-fit items-center`}>
+                <div className="mt-6">
+                    <Image src="/assets/logorect.svg" alt="Logo" width={100} height={100} className={Styles.logoImg} />
+                </div>
+                <div className="flex flex-col gap-3 mt-8">
+                {buttons.map((button) => (
+                    <button key={button.id} className={selectedOption ? `${Styles.selected}` : `${Styles.unselected}`} onClick={() => handleClick(button.id)}>
+                        {button.label}
+                    </button>
+                    ))}
+                    {SuperAdmin?<button className={Styles.btns} onClick={()=>{if(month === ''){Toast.fire({icon: 'warning',title: 'No Event Selected ...'})}else{SendSMSFunction()}}}>{sendmessage}</button>:<></>}
                 </div>
               </div>
-            </> : <></>
-          }
-          <Popper
-            sx={{ zIndex: 1200 }}
-            open={open}
-            anchorEl={anchorEl}
-            placement="bottom-start"
-            transition
-            style={{"background":"none",marginTop:"3em"}}
-          >
-          {({ TransitionProps }) => (
-              <Fade {...TransitionProps} timeout={350}>
-              <Paper className={Styles.popperDiv}>
-                  {search.map((item, index) => {
-                  if (index <= 4) {
-                      return (
-                      <div
-                          className={Styles.searchresult}
-                          key={index + 1}
-                      >
-                          <div onClick={() => handleOptionSelect(item)}>
-                          {/* {index + 1}.{" "} */}
-                          {
-                            state
-                              ? item.EventName
-                              //  : item.EventName.split(`${item.UserID}-`)[1]
-                              //      .split("_")
-                              //      .join(" ")
-                              : 
-                              <div className={`flex gap-4 items-center mt-2 ${Styles.searchResDiv} cursor-pointer`}>
-                                <div style={{width:"3em"}}>{index + 1}.{" "}</div>
-                                <div>{item.EventName.split(`${item.UserID}-`)[1].split("_").join(" ")}</div>
-                                <div>{item.EventDate}</div>
-                                <div>{item.Location}</div>
+              <div className="min-h-screen w-full" style={{backgroundColor:"var(--bg)"}}>
+                <div className="flex w-full items-center justify-between py-9 px-10">
+                    <div className="text-2xl" style={{color:"var(--blue)"}}>Events</div>
+                    <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+                </div>
+                <div className="flex items-center w-full"> 
+                  <div className={`${Styles.inpDiv} flex items-center w-full`}>
+                  <input
+                  id={Styles.input}
+                  type="text"
+                  value={searchValue}
+                  style={{margin:"0 2em 0 2em",width:"50%",borderRadius:"10px",padding:".4em .8em",border:"none",outline:"none"}}
+                  onChange={handleSearchInputChange}
+                  onFocus={(e) => {
+                      setAnchorEl(e.currentTarget);
+                      setOpen(true);
+                  }}
+                  onBlur={() => {
+                      setOpen(false);
+                  }}
+                  placeholder="Search Event"
+                  />
+                  <div>
+                  <button
+                      className={Styles.searchbtn}
+                      onClick={handleSearch}
+                  >
+                      Search
+                  </button>
+                  </div>
+              </div>
+            </div>
+            <div>
+              {
+                open ? 
+                <>
+                  <div>
+                    <div className={`flex gap-4 items-center mt-2 bg-white ml-8 mb-4 ${Styles.searchResDiv}`}>
+                      <div style={{width:"3em"}}>#</div>
+                      <div>Event name</div>
+                      <div>Date</div>
+                      <div>Location</div>
+                    </div>
+                  </div>
+                </> : <></>
+              }
+              <Popper
+                sx={{ zIndex: 1200 }}
+                open={open}
+                anchorEl={anchorEl}
+                placement="bottom-start"
+                transition
+                style={{"background":"none",marginTop:"3em"}}
+              >
+              {({ TransitionProps }) => (
+                  <Fade {...TransitionProps} timeout={350}>
+                  <Paper className={Styles.popperDiv}>
+                      {search.map((item, index) => {
+                      if (index <= 4) {
+                          return (
+                          <div
+                              className={Styles.searchresult}
+                              key={index + 1}
+                          >
+                              <div onClick={() => handleOptionSelect(item)}>
+                              {/* {index + 1}.{" "} */}
+                              {
+                                state
+                                  ? item.EventName
+                                  //  : item.EventName.split(`${item.UserID}-`)[1]
+                                  //      .split("_")
+                                  //      .join(" ")
+                                  : 
+                                  <div className={`flex gap-4 items-center mt-2 ${Styles.searchResDiv} cursor-pointer`}>
+                                    <div style={{width:"3em"}}>{index + 1}.{" "}</div>
+                                    <div>{item.EventName.split(`${item.UserID}-`)[1].split("_").join(" ")}</div>
+                                    <div>{item.EventDate}</div>
+                                    <div>{item.Location}</div>
+                                  </div>
+                                }
                               </div>
-                            }
                           </div>
+                          );
+                      }
+                      })}
+                  </Paper>
+                  </Fade>
+              )}
+              </Popper>
+            </div>
+                  <div></div>
+              </div>
+            </div> : <></>
+          }
+          {
+            CreateNew ? 
+              <div className="w-full flex min-h-screen items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
+                <div className={Styles.subCon}>
+                  <div className={Styles.backfromcrt} onClick={() => {setCreateNew(false); setsearchPage(true); setopenDrawer(false)}}><img style={{ width: "8px" }} src="/svg/back.svg"></img> Back</div>
+                    <div className={`${Styles.newfolderDiv} flex flex-col gap-2`} >
+                        <img  src="/assets/crtnew.svg" alt="Create New Folder" className={Styles.crtnewImg} style={{width:"7em",height:"5em"}} onClick={handleNewFolderClick}/>
+                        <div>New folder</div>
+                    </div>
+                   {   
+                      isDialogOpen && (
+                      <div className={Styles.dialogBackdrop}>
+                          <div className={Styles.maincrtDiv}>
+                              <div className={Styles.createnewDiv}>
+                                <div>New Folder</div>
+                                <div>
+                                    <input
+                                    id={Styles.crtnew}
+                                    type="text"
+                                    placeholder="Untitled Folder"
+                                    value={folderName}
+                                    onChange={(e) => setFolderName(e.target.value)}
+                                    />
+                                </div>
+                                <div className={Styles.crtcan}>
+                                    <div className={Styles.can} onClick={handleCancelClick}>Cancel</div>
+                                    <div className={Styles.crt} onClick={handleCreateClick}>Create</div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    )
+                }
+                </div>
+              </div>: ""
+          }
+          {
+            allFoldersPage ?
+            <div className="w-full flex min-h-screen items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
+              <div className={Styles.subCon}>
+                  <div className={Styles.backfromcrt} onClick={() => {setCreateNew(false); setsearchPage(true); setopenDrawer(false); setAllfoldersPage(false)}}><img style={{ width: "8px" }} src="/assets/back.svg"></img> Back</div>
+                  <div className={Styles.allFolderstit} style={{marginBottom:"1em"}}>All Folders</div>
+                  <div className={Styles.FoldersCon}>
+                    {allFolders.map((value, index) => (
+                      <div key={index} className={Styles.folder} onDoubleClick={() => handleFolderDoubleClick(value)}>
+                        <img src="/assets/folder.svg" alt={`${index}`} className={Styles.folderImg}/>
+                        <div className={Styles.folName}>{truncateString(value, 11)}</div>
                       </div>
-                      );
-                  }
-                  })}
-              </Paper>
-              </Fade>
-          )}
-          </Popper>
-         </div>
-              <div></div>
-          </div>
+                    ))}
+                    <div className={Styles.folder} onClick={() => {setAllfoldersPage(false);setCreateNew(true);}}> 
+                      <img src="/assets/crtnew.svg" alt="newfolder" className={Styles.folderImg} />
+                      <div className={Styles.folName}>New Folder</div>
+                    </div>
+                  </div>
+              </div>
+            </div> : ""
+          }
+          { inputbox?
+          
+            <div className={Styles.dialogBackdrop}>
+              <div className={Styles.maincrtDiv}>
+                <div className={Styles.FilesInputBox}>
+                  <div>
+                      <form onSubmit={UploadImages} ref={form} enctype="multipart/form-data" className={Styles.FilesInputBox}>
+                          <div className="w-full flex items-center justify-between"> 
+                              <div className="text-black text-lg">Upload</div>
+                              <div onClick={()=>{inputboxvalue(false)}}>&#x2716;</div>
+                          </div>
+                          <input type="file" name="Image_Files" accept=".jpg, .jpeg, .png" multiple required onChange={(e)=>{uploadvalue(e.target.files)}}/>
+                          <div>
+                            <button type="submit" disabled={uploadstatus}>{uploadstatus?"Please wait ...":"Upload"}</button>
+                          </div>
+                          {uploadstatus?<>
+                              <div className={Styles.UploadPercentage}>
+                                  <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
+                                  <div>
+                                      <div className={Styles.lineclass}><Line percent={percentage} strokeWidth={3} strokeColor="#725aff" trailColor="#fbfcfd67"/></div>
+                                      <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div>
+                                  </div>
+                              </div>
+                          </>:<></>}
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            :<></>
+          }
         </div>
-      </div>
     </>
   );
 }
