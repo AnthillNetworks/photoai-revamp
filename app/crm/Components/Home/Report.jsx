@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { GetCustomerFuntion,GetCustomerByStartAndEndDate,GetCustomerByStartAndEndAndNameDate,GetCustomerByNameDate } from './AllFunctions';
 import { DatePickerIcon } from './page';
+import Image from 'next/image';
 export default function ReportLeftDrawer() {
   const [StartDate,SetStartDate] = React.useState('')
   const [Data,DataSet] = React.useState([]);
@@ -168,7 +169,7 @@ export default function ReportLeftDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-        <div><img onClick={toggleDrawer(anchor, true)} src='/svg/report.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/></div>
+        <div><Image onClick={toggleDrawer(anchor, true)} src='/svg/report.svg' alt="search" width={100} height={100} style={{width: '60px',height:'auto',cursor:'pointer'}}/></div>
         <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
           {list(anchor)}
         </Drawer>

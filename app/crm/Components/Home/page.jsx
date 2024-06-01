@@ -13,6 +13,7 @@ import EditLeftDrawer from './EditDrawer';
 import GreatingsLeftDrawer from './GreatingsDrawer';
 import ReportLeftDrawer from './Report';
 import AddPayment from './AddPayment';
+import Image from 'next/image';
 export default function HomePage({UserID}) {
     const [Array,ArrayValue] = useState([]);
     const [TodayDate,TodayDateValue] = useState(0);
@@ -76,7 +77,7 @@ export default function HomePage({UserID}) {
   return (
     <>
         <div className={Styles.NavSearchModel}>
-            <div><img src={UsereInfo?.Logo||''} style={{width:'100px',borderRadius:'5px'}}/></div>
+            <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
             <div className={Styles.SearchModel}>
                     <div onClick={handlePreviousMonth}><ArrowLeftIcon color="primary" style={{fontSize:"50px",color:'white',cursor:'pointer'}}/></div>
                     <select
@@ -107,10 +108,10 @@ export default function HomePage({UserID}) {
         </div>
         <div className={Styles.MainContent}>
             <div>
-                <div className={Styles.JustForFUN}><img style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div>
+                <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div>
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'60svh',justifyContent:'space-around'}}>
                     <EditLeftDrawer/>
-                    <Link href="/"><img src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/></Link>
+                    <Link href="/"><Image width={100} height={100} src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/></Link>
                     <GreatingsLeftDrawer/>
                     <ReportLeftDrawer/>
                 </div>:<></>}
