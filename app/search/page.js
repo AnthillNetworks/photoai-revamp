@@ -4,7 +4,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 import { cookies } from 'next/headers'
 import { GetAllEvents,GetAllEventsAsSuperAdmin } from "./components/Search/search";
 import { createClient } from '@supabase/supabase-js'
-import Search from "./Components/Search/searchpage";
+import Search from "./components/Search/searchpage";
 export default async function Home() {
   noStore();
   const cookieStore = cookies();
