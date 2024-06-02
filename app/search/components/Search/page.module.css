@@ -205,4 +205,14 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 4em;
+    gap: 1em;
+}
+
+.uploadBtn{
+    background-color: var(--pink);
+    color: white;
+    padding: .4em 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
 }

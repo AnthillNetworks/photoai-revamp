@@ -76,6 +76,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
   const [secretDiv,setsecretDiv] = useState(false);
   const [secretKey, setSecretKey] = useState('');
   const [details, setDetails] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
  
   const buttons = [
     { id: "uploadFolder", label: "Upload Images" },
@@ -205,6 +206,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
   };
 
   const UploadImages = async (e) => {
+    console.log(selectedFiles.length);
     LoaderStatsValue(true)
     e.preventDefault();
     uploadstatusvideo(true);
@@ -370,7 +372,6 @@ export default function Search({ AllEventData, SuperAdmin }) {
     setSecretKey("") ;
     setsecretDiv(false);
   };
-
 
   const UploadVideos = async (e) => {
     LoaderStatsValue(true)
@@ -553,7 +554,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
             CreateNew ? 
               <div className="w-full flex min-h-screen items-center justify-center" style={{backgroundColor:"var(--bg)"}}>
                 <div className={Styles.subCon}>
-                  <div className={Styles.backfromcrt} onClick={() => {setCreateNew(false); setsearchPage(true); setopenDrawer(false)}}><img style={{ width: "8px" }} src="/svg/back.svg"></img> Back</div>
+                  <div className={Styles.backfromcrt} onClick={() => {setCreateNew(false); setsearchPage(true); setopenDrawer(false)}}><img style={{ width: "8px" }} src="/assets/back.svg"></img> Back</div>
                     <div className={`${Styles.newfolderDiv} flex flex-col gap-2`} >
                         <img  src="/assets/crtnew.svg" alt="Create New Folder" className={Styles.crtnewImg} style={{width:"7em",height:"5em"}} onClick={handleNewFolderClick}/>
                         <div>New folder</div>
@@ -593,42 +594,81 @@ export default function Search({ AllEventData, SuperAdmin }) {
                   <div className={Styles.allFolderstit} style={{marginBottom:"1em"}}>All Folders</div>
                   <div className={Styles.FoldersCon}>
                     {allFolders.map((value, index) => (
-                      <div key={index} className={Styles.folder} onDoubleClick={() => handleFolderDoubleClick(value)}>
+                      <div key={index} className={Styles.folder} style={{cursor:"pointer"}} onDoubleClick={() => handleFolderDoubleClick(value)}>
                         <img src="/assets/folder.svg" alt={`${index}`} className={Styles.folderImg}/>
                         <div className={Styles.folName}>{truncateString(value, 11)}</div>
                       </div>
                     ))}
                     <div className={Styles.folder} onClick={() => {setAllfoldersPage(false);setCreateNew(true);}}> 
                       <img src="/assets/crtnew.svg" alt="newfolder" className={Styles.folderImg} />
-                      <div className={Styles.folName}>New Folder</div>
+                      <div className={Styles.folName} style={{cursor:"pointer"}}>New Folder</div>
                     </div>
                   </div>
-              </div>
+              </div>  
             </div> : ""
           }
           { inputbox?
-          
             <div className={Styles.dialogBackdrop}>
               <div className={Styles.maincrtDiv}>
                 <div className={Styles.FilesInputBox}>
                   <div>
                       <form onSubmit={UploadImages} ref={form} enctype="multipart/form-data" className={Styles.FilesInputBox}>
                           <div className="w-full flex items-center justify-between"> 
-                              <div className="text-black text-lg">Upload</div>
-                              <div onClick={()=>{inputboxvalue(false)}}>&#x2716;</div>
+                              <div className="text-black text-lg font-bold">Upload</div>
+                              <div onClick={()=>{inputboxvalue(false)}} style={{cursor:"pointer",color:"var(--pink)"}}>&#x2716;</div>
                           </div>
-                          <input type="file" name="Image_Files" accept=".jpg, .jpeg, .png" multiple required onChange={(e)=>{uploadvalue(e.target.files)}}/>
-                          <div>
-                            <button type="submit" disabled={uploadstatus}>{uploadstatus?"Please wait ...":"Upload"}</button>
+                          {/* <input type="file" name="Image_Files" accept=".Drag & drop files or Browsepg, .jpeg, .png" multiple required onChange={(e)=>{uploadvalue(e.target.files)}}/> */}
+                          
+                          {/* <div className="flex flex-col items-center justify-center px-4 py-6" style={{border:"1px dotted #384EB7",borderRadius:'10px'}}>
+                            <div><img src="/assets/upload.svg" alt="Upload Image" /></div>
+                            <div className="text-black">Drag & drop files or <span style={{color:"var(--blue)"}}>Browse</span></div>
+                            <div style={{fontSize:"12px",color:"#676767"}}>Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</div>
+                          </div> */}
+
+                          <div className="flex flex-col items-center justify-center px-4 py-6" style={{ border: "1px dotted #384EB7", borderRadius: '10px' }}>
+                            <label htmlFor="file-upload" className="flex flex-col items-center justify-center cursor-pointer">
+                              <div><img src="/assets/upload.svg" alt="Upload Image" /></div>
+                              <div className="text-black">Drag & drop files or <span style={{ color: "var(--blue)" }}>Browse</span></div>
+                              <div style={{ fontSize: "12px", color: "#676767" }}>Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</div>
+                              <input
+                                id="file-upload"
+                                type="file"
+                                name="Image_Files"
+                                accept=".jpg, .jpeg, .png, .gif, .mp4, .pdf, .psd, .ai, .doc, .docx, .ppt, .pptx"
+                                multiple
+                                required
+                                onChange={(e) => { uploadvalue(e.target.files); setSelectedFiles(e); }}
+                                style={{ display: 'none' }}
+                              />
+                            </label>
+                          </div>
+
+                          <div className="w-full">
+                            <button type="submit" disabled={uploadstatus} className={Styles.uploadBtn} >{uploadstatus?"Please wait ...":"Upload"}</button>
                           </div>
                           {uploadstatus?<>
-                              <div className={Styles.UploadPercentage}>
+                              <div style={{alignSelf:"start"}}> 
+                                  Uploading - { `${tottaluploaded} /  ${upload.length} Photos` }
+                              </div>
+                              <div className={Styles.UploadPercentage} style={{alignSelf:"start"}}>
                                   <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
                                   <div>
-                                      <div className={Styles.lineclass}><Line percent={percentage} strokeWidth={3} strokeColor="#725aff" trailColor="#fbfcfd67"/></div>
-                                      <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div>
+                                      <div className={Styles.lineclass}>
+                                        <Line percent={percentage} strokeWidth={3} strokeColor="#ec2265" trailColor="#ec2265"/>
+                                      </div>
+                                      {/* <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div> */}
                                   </div>
                               </div>
+                                
+                              {/* <div className={Styles.UploadPercentage}>
+                                  <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
+                                  <div>
+                                      <div className={Styles.lineclass}>
+                                        <Line percent={percentage} strokeWidth={3} strokeColor="#725aff" trailColor="#fbfcfd67"/>
+                                      </div>
+                                      <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div>
+                                  </div>
+                              </div> */}
                           </>:<></>}
                       </form>
                   </div>
@@ -637,6 +677,84 @@ export default function Search({ AllEventData, SuperAdmin }) {
             </div>
             :<></>
           }
+          {
+          videoupload ? 
+          <>
+            <div className={Styles.dialogBackdrop}>
+              <div className={Styles.maincrtDiv}>
+                <div style={{borderRadius:"10px"}}>
+                  <div>
+                    <form onSubmit={UploadVideos} ref={form} encType="multipart/form-data" style={{backgroundColor:"var(--white)"}} className={Styles.FilesInputBox}>
+                      <div className="w-full flex items-center justify-between"> 
+                          <div className="text-black text-lg font-bold">Upload Videos</div>
+                          <div onClick={() => { setvideoUpload(false) }}style={{cursor:"pointer",color:"var(--pink)"}}>&#x2716;</div>
+                      </div>
+                      {/* <input type="file" name="Video_Files" accept=".mp4" multiple required onChange={(e) => { uploadvalue(e.target.files) }} />
+                      <button type="submit" disabled={uploadstatus}>{uploadstatus ? "Please wait ..." : "Upload"}</button> */}
+                      <div className="flex flex-col items-center justify-center px-4 py-6" style={{ border: "1px dotted #384EB7", borderRadius: '10px' }}>
+                        <label htmlFor="file-upload_" className="flex flex-col items-center justify-center cursor-pointer">
+                          <div><img src="/assets/upload.svg" alt="Upload Image" /></div>
+                          <div className="text-black">Drag & drop files or <span style={{ color: "var(--blue)" }}>Browse</span></div>
+                          <div style={{ fontSize: "12px", color: "#676767" }}>Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</div>
+                          <input
+                            id = "file-upload_"
+                            type="file" name="Video_Files" accept=".mp4"
+                            multiple
+                            required
+                            onChange={(e) => { uploadvalue(e.target.files) }}
+                            style={{ display: 'none' }}
+                          />
+                        </label>
+                      </div>
+                      <div className="w-full">
+                        <button type="submit" disabled={uploadstatus} className={Styles.uploadBtn} >{uploadstatus?"Please wait ...":"Upload"}</button>
+                      </div>
+                      { uploadstatus ? 
+                      <>
+                        <div style={{alignSelf:"start"}}> 
+                            Uploading - { `${tottaluploaded} /  ${upload.length} Photos` }
+                        </div>
+                        <div className={Styles.UploadPercentage} style={{alignSelf:"start"}}>
+                            <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
+                            <div>
+                                <div className={Styles.lineclass}>
+                                  <Line percent={percentage} strokeWidth={3} strokeColor="#ec2265" trailColor="#ec2265"/>
+                                </div>
+                            </div>
+                        </div>
+                      </>:<></>}
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </> : <></>
+        }
+        {
+          secretDiv ?
+          <div className={Styles.dialogBackdrop}>
+            <div className={Styles.maincrtDiv}>
+              <div className="px-8 py-6 flex flex-col items-center justify-center gap-4 bg-white" style={{borderRadius:"10px"}}>
+                <div className="text-xl font-bold">Set a secret key</div>
+                <div className="flex flex-col">
+                  <label htmlFor="text" className="text-sm pl-1" style={{alignSelf:"start"}}>Enter Secret key</label>
+                  <input
+                  id="secretKeyInput"
+                  type="text"
+                  placeholder="Secret Key"
+                  className="outline-none px-2 py-0 mt-1"
+                  style={{border:"1px solid #A0A5FF",borderRadius:"4px"}}
+                  />
+                </div>
+                <div className="w-full flex items-center justify-end" style={{fontSize:"14px"}}>  
+                  <button className="px-4 py-2" style={{"color":"red"}} onClick={() => setsecretDiv(false)}>Close</button>
+                  <button className="text-white px-4 py-2" style={{backgroundColor:"var(--pink)",borderRadius:"5px"}} onClick={handleSetKey}>Set Key</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        :<></>
+        }
         </div>
     </>
   );
