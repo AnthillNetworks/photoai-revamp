@@ -1,10 +1,9 @@
 'use client'
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Styles from "./page.module.css"
-import LoginwithSecretKey from "./Login";
 import Swal from 'sweetalert2';
 import Loader from "@/app/loader/page";
+import LoginwithSecretKey from "./Fun";
 export default function SignIn({event}){
     const [loadeer,loadderevalue] = useState(false);
     const HandelSubmit = async(Key)=>{

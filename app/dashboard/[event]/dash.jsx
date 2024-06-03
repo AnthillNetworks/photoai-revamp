@@ -20,6 +20,7 @@ import ConfirmDelete from "./confirm"
 import Link from "next/link"
 import { FetchUserInFo } from "@/app/crm/Components/Home/AllFunctions"
 import Skeleton from '@mui/material/Skeleton';
+import Image from "next/image"
 export default function Dashboard({ event}){
   const SuperValue = useSelector((state)=>state.Login.Is_SuperAdmin);
     const sliderRef = useRef(null);
@@ -361,88 +362,67 @@ export default function Dashboard({ event}){
           }
         }
           loadderevalue(false)
-  };
-  // const FetchImagesByFolderName = async(key)=>{
-  //   const listParams = {
-  //     Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-  //     Prefix: `${event}/photographers_images/${key.split('/')[2]}`
-  //   };
-  //   try {
-  //     const FetchedImages = await s3Client.send(new ListObjectsV2Command(listParams));
-  //     const fetchedImages = FetchedImages.Contents.map(obj => obj.Key);
-  //     stackonevalue([]);
-  //     stacktwovalue([]);
-  //     stackthreevalue([]);
-  //     stackfourvalue([]);
-  //     DobeMappedData([]);
-  //     DobeMappedData(fetchedImages);
-  //     PushToStacks(fetchedImages);
-  //     setfolderSelect(key.split('/')[2])
-  //   } catch (error) {
-  //     console.error('Error fetching images:', error);
-  //   }
-  // }
-
-  const QueryVideos = async() => {
-    console.log("Querying Videos...")
-    pagetextvalue("All Videos");
-    loadderevalue(true)
-    stackonevalue([]);
-    stacktwovalue([]);
-    stackthreevalue([]);
-    stackfourvalue([]);
-    setPhotos(false);
-    
-    // Querying Videos
-    const command = new ListObjectsV2Command({
-      Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-      Delimiter: '/',
-      Prefix: `${event}/photographers_videos/`
-      });
-      try {
-          const response = await s3Client.send(command);
-          console.log(response)
-          const videoKeys = response.Contents.map((content) => content.Key);
-          console.log(videoKeys);
-          setVideos(videoKeys);
-      } catch (error) {
-          console.error('Error listing Videos:', error);
-          throw error;
-      }
-    loadderevalue(false);
-  }
+    };
+    const QueryVideos = async() => {
+      console.log("Querying Videos...")
+      pagetextvalue("All Videos");
+      loadderevalue(true)
+      stackonevalue([]);
+      stacktwovalue([]);
+      stackthreevalue([]);
+      stackfourvalue([]);
+      setPhotos(false);
+      
+      // Querying Videos
+      const command = new ListObjectsV2Command({
+        Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+        Delimiter: '/',
+        Prefix: `${event}/photographers_videos/`
+        });
+        try {
+            const response = await s3Client.send(command);
+            console.log(response)
+            const videoKeys = response.Contents.map((content) => content.Key);
+            console.log(videoKeys);
+            setVideos(videoKeys);
+        } catch (error) {
+            console.error('Error listing Videos:', error);
+            throw error;
+        }
+      loadderevalue(false);
+    }
 
   return(
         <>
         {loadeer?<Loader/>:""}
         <div className={Styles.Dashboard}>
-            <div>
+            <div className="flex flex-col items-center justify-start gap-8">
                 <div className={Styles.Logo}><img src={userInfo?.Logo||''} style={{width:'100px',borderRadius:'5px'}}/></div>
-                <div className={Styles.LeftNavIcons}>
-                    <div onClick={OnHomeClickFun} style={pagetext === 'All Photos'?{color:'#725AFF'}:{color:'#ffffff'}}><img src={pagetext === 'All Photos'?'/svg/SelectedPhoto.svg':'/svg/Photo.svg'}/><div>Photos</div></div>
-                    <div onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#725AFF'}:{color:'#ffffff'}}><img src={pagetext === 'All Videos'?'/svg/SelectedPhoto.svg':'/svg/Photo.svg'}/><div>Videos</div></div>
-                    <div onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#725AFF'}:{color:'#ffffff'}}><img src={pagetext === 'Explore'?'/svg/expSelected.svg':'/svg/exploreSearch.svg'}/><div>Explore</div></div>
-                    <div onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#725AFF'}:{color:'#ffffff'}}><img src={pagetext === 'Favorites'?'/svg/FavSelected.svg':'/svg/Fav.svg'}/><div>Favorites</div></div>
+                <div className={`${Styles.LeftNavIcons} w-full flex flex-col items-center gap-2`}>
+                    <div onClick={OnHomeClickFun}  style={pagetext === 'All Photos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Photos'?'/assets/photo.svg':'/assets/inphoto.svg'}/><div>Photos</div></div>
+                    <div onClick={QueryVideos} style={pagetext === 'All Videos'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'All Videos'?'/assets/videos.svg':'/assets/invideos.svg'}/><div>Videos</div></div>
+                    <div onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div>Explore</div></div>
+                    <div onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div>Favorites</div></div>
                 </div>
-                <button className={Styles.DashboardMenuBtn} onClick={()=>{if(dropdown){dropdownvalue(false)}else{dropdownvalue(true)}}}>Attendees</button>
+                {/* <button className={Styles.DashboardMenuBtn} onClick={()=>{if(dropdown){dropdownvalue(false)}else{dropdownvalue(true)}}}>Attendees</button> */}
             </div>
             <div>
                 <div className={Styles.MakeNavFixed}>
-                    <div className={Styles.NavOneForSearch}>
+                    {/* <div className={Styles.NavOneForSearch}>
                         <div>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn}>Download</Link>:<></>}</>}</div>
-                        <div>Welcome!</div>
-                    </div>
-                    <div className={Styles.NavOneForMenu}>
-                        <div>{pagetext}</div>
+                    </div> */}
+                    <div className={Styles.NavOneForMenu} style={{borderBottom:"1px solid var(--blue)"}}>
+                        <div style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
-                            <div><img src="/svg/menu.svg"/></div>
-                            <div><img className={Styles.UserIcon} src="https://mui.com/static/images/avatar/1.jpg"/></div>
+                            {/* <div><img src="/svg/menu.svg"/></div>
+                            <div><img className={Styles.UserIcon} src="https://mui.com/static/images/avatar/1.jpg"/></div> */}
+                            <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
                         </div>
                     </div>
-                    <div className={Styles.FoldersCss}>
+                    <div className={`${Styles.FoldersCss} text-black`}>
                       {pagetext === 'All Photos'?<>
                       {AllFolders.map((item,index)=>{
-                            return <div onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid #725aff'}:{}}>{item.split('/')[2]}</div>
+                            return <div onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
                           })}
                       </>:<></>}
                     </div>

@@ -1,5 +1,5 @@
 'use server'
-import SignIn from "../components/SignIn/page";
+import SignIn from "../Components/SignIn/page";
 import { unstable_noStore as noStore } from 'next/cache';
 import { cookies } from 'next/headers'
 import { GetAllEvents,GetAllEventsAsSuperAdmin } from "./components/Search/search";

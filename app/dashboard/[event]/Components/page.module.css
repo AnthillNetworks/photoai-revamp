@@ -1,5 +1,6 @@
 .Dashboard{
     display: flex;
+    background-color: var(--bg);
 }
 .Dashboard > div:nth-child(1){
     width: 25vw;
@@ -7,7 +8,7 @@
     position: fixed;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: #1E2742;
+    background-color: var(--white);
     border: 0 10px 10px 0;
 }
 .Dashboard > div:nth-child(2){
@@ -22,12 +23,13 @@
     width: 71vw;
     /* padding-top: 13vw; */
     margin: auto;
+    background-color: var(--bg);
   }
   .MainContainer > div{
     width: 25%;
   }
   .SearchModel{
-    background-color: #1E2742;
+    background-color: var(--blue);
     border-radius: 25px;
     width: 25vw;
     display: flex;
@@ -40,19 +42,19 @@
     margin-top: 3vw;
   }
   .NavOneForSearch > div:nth-child(2){
-    color: white;
+    color: black;
     font-size: 30px;
     font-weight: bolder;
     margin-right: 2vw;
   }
   .MakeNavFixed{
     position: fixed;
-    background-color: #13192f;
+    background-color: var(--bg);
     z-index: 1000;
     width: 71vw;
   }
   .SearchModel > input{
-    background-color: #1E2742;
+    background-color: var(--bg);
     border: none;
     border-radius: 25px;
     width: 100%;
@@ -70,6 +72,7 @@
     align-items: center;
     margin-top: 2vw;
     padding-bottom: 1vw;
+    padding-left: .5em;
   }
   .NavOneForMenu > div:nth-child(1){
     color: #979EA7;
@@ -96,14 +99,13 @@
     margin-top: 3vw;
     text-align: center;
   }
-  .LeftNavIcons{
-    margin-left: 3vw;
-    margin-top: 8vw;
-  }
   .LeftNavIcons > div{
     cursor: pointer;
     display: flex;
     align-items: center;
+    border-radius: 8px;
+    width: 80%;
+    margin: auto;
   }
   .DashboardMenuBtn{
     margin-left: 3vw;
@@ -111,7 +113,7 @@
     cursor: pointer;
     font-size: 20px;
     color: white;
-    background-color: #725AFF;
+    background-color: var(--darkblue);
     border: none;
     padding: 1vw 2vw;
     border-radius: 3px;
@@ -154,7 +156,7 @@
     align-items: center;
     overflow: scroll;
     scroll-snap-type: x mandatory;
-    background-color: #13192f;
+    background-color: var(--bg);
     transition: opacity 0.3s ease;
   }
   .FullscreenImage{
@@ -183,7 +185,7 @@
     font-size: 30px;
     padding: 10px 20px;
     cursor: zoom-out;
-    background-color: #24305c;
+    background-color: var(--blue);
     border-radius: 5px;
     margin: 5px 5px 0 95vw;
   }
@@ -203,7 +205,7 @@
     cursor: pointer;
   }
   .DownloadBtnOnSlider{
-    background-color: #725AFF;
+    background-color: var(--blue);
     border-radius: 5px;
     color: white;
     text-decoration: none;
@@ -226,7 +228,7 @@
     text-indent: 10000px;
   }
   .NavBtn{
-    background-color: #725aff;
+    background-color: var(--darkblue);
     color: white;
     border-radius: 30px;
     font-size: 15px;
@@ -241,9 +243,10 @@
   overflow: scroll;
 }
 .FoldersCss > div{
-  margin: 10px;
+  margin: 10px 0;
   padding: 5px 10px;
-  color: white;
+  color: var(--black);
+  text-transform: capitalize;
   border-radius: 1px;
   cursor: pointer;
 }
@@ -258,6 +261,11 @@
   color: white;
   font-size: 35px;
 
+}
+.profile{
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
   @media screen and (min-width: 0px) and (max-width: 1100px) {

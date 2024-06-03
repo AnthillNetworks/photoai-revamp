@@ -1,9 +1,9 @@
 'use server'
-import SignIn from "./components/SignIn/page";
+import SignIn from "./Components/SignIn/page";
 import { unstable_noStore as noStore } from 'next/cache';
 import { cookies } from 'next/headers'
 import { createClient } from '@supabase/supabase-js'
-import Welcome from "./components/welcome/page";
+import Welcome from "./Components/welcome/page";
 export default async function Home() {
   noStore();
   const cookieStore = cookies();

@@ -1,0 +1,61 @@
+.MainDivForNav{
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 3vw 10vw 3vw 10vw;
+    width: 80vw;
+    display: flex;
+    background-color: #13192F;
+    justify-content: space-between;
+    align-items: center;
+}
+.FirstDiv{
+    display: flex;
+    align-items: center;
+}
+.ImageALT{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.FirstDiv > div{
+    margin-top: 1vw;
+    font-weight: bolder;
+    font-size: 24px;
+    margin-left: 2vw;
+    color: #979ea7;
+    text-align: left;
+}
+.FirstDiv > div > div:nth-child(2){
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+.NavBtn{
+    background-color: #725aff;
+    color: white;
+    border-radius: 30px;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 0.6vw 2.5vw;
+    border: none;
+    font-family: 'poppins';
+    cursor: pointer;
+}
+@media screen and (min-width: 0px) and (max-width: 600px) {
+    .MainDivForNav{
+        padding: 3vw 5vw 3vw 5vw;
+        width: 90vw;
+    }
+    .ImageALT {
+        width: 60px;
+        height: 60px;
+    }
+    .FirstDiv > div{
+        font-size: 20px;
+    }
+    .NavBtn{
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+  }

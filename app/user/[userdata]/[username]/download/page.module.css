@@ -1,0 +1,23 @@
+.NavBtn{
+    background-color: #725aff;
+    color: white;
+    border-radius: 30px;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 0.6vw 2.5vw;
+    border: none;
+    font-family: 'poppins';
+    cursor: pointer;
+}
+.MainContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    flex-direction: column;
+}
+.MainContent > div{
+    color: white;
+    font-size: 30px;
+    margin: 30px 0;
+}
