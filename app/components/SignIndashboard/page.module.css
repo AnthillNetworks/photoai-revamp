@@ -1,0 +1,126 @@
+.SignInDiv{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SignInInnerDiv{
+    width: 100%;
+    height: 80vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 700px;
+    background-color: #1E2742;
+}
+.ForCheckAndForgot > div{
+    display: flex;
+    margin: 0 0.5vw;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+.SignInInneDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    width: 100%;
+}
+.SignInInneDiv > h1{
+    color: white;
+}
+.InputBox{
+    color: white;
+    width: 100%;
+    background-color: #13192f;
+    padding: 1vw 2vw;
+    margin: 3vw 0 0 0;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+.InputBox::placeholder{
+    color: white;
+}
+.ForCheckAndForgot{
+    display: flex;
+    margin: 2vw 0;
+}
+.ForCheckAndForgot > div:nth-child(1){
+    cursor: pointer;
+}
+.ForCheckAndForgot > a{
+    color: #9747FF;
+    text-decoration: none;
+}
+.SignInInneDiv > button{
+    width: 200px;
+    border-radius: 8px;
+    padding: 1vw 2vw;
+    border: none;
+    color: white;
+    background-color: #9747FF;
+    cursor: pointer;
+}
+@media screen and (min-width: 0px) and (max-width: 900px) {
+    .SignInInnerDiv{
+        max-width: 550px;
+    }
+    .InputBox{
+        padding: 2vw 3vw;
+        border-radius: 5px;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 700px) {
+    .SignInInnerDiv{
+        max-width: 450px;
+    }
+    .SignInInneDiv > button{
+        padding: 2vw 3vw;
+        border-radius: 5px;
+    }
+    .SignInDiv{
+        height: 90vh;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 550px) {
+    .SignInInnerDiv{
+        max-width: 90%;
+        height: 70vh;
+    }
+    .InputBox{
+        margin: 10vw 0 0 0;
+    }
+    .SignInInneDiv{
+        max-width: 80%;
+    }
+    .SignInInneDiv > button{
+        padding: 3vw 4vw;
+        border-radius: 5px;
+        width: 80%;
+    }
+    .ForCheckAndForgot{
+        flex-direction: column;
+        justify-content: left;
+        width: 115%;
+    }
+    .ForCheckAndForgot> div{
+        margin-top: 3vw;
+    }
+    .ForCheckAndForgot > a{
+        margin-left: 1vw;
+        margin-top: 5vw;
+    }
+    .InputBox{
+        padding: 3vw 4vw;
+        border-radius: 5px;
+    }
+    .SignInDiv{
+        height: 80vh;
+    }
+}

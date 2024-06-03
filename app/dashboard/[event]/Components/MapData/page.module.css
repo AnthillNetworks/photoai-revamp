@@ -1,0 +1,38 @@
+.Image{
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    cursor: zoom-in;
+}
+.OneDiv{
+    margin: 3px;
+}
+.CheckBox{
+    position: absolute!important;
+    z-index: 1;
+    width: 20px;
+    cursor: pointer;
+    margin-top: -4vw!important;
+    margin-left: 1vw!important;
+}
+@media screen and (min-width: 0px) and (max-width: 1000px) {
+    .CheckBox{
+        margin-top: -5vw!important;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 800px) {
+    .CheckBox{
+        margin-top: -6vw!important;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 700px) {
+    .CheckBox{
+        margin-top: -7vw!important;
+    }
+}
+@media screen and (min-width: 0px) and (max-width: 600px) {
+    .CheckBox{
+        margin-top: -15vw!important;
+        margin-left: 4vw!important;
+    }
+}
