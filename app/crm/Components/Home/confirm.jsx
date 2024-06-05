@@ -34,7 +34,7 @@ export default function Confirm({ConstCheckedData}) {
   }
   return (
     <React.Fragment>
-      <div variant="outlined" onClick={handleClickOpen} style={{padding:'15px 20px'}}>Send Update</div>
+      <div variant="outlined" onClick={handleClickOpen}>Send Update</div>
       <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
         <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
             <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>

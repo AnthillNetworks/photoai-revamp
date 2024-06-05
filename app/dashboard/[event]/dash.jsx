@@ -395,7 +395,7 @@ export default function Dashboard({ event}){
   return(
         <>
         {loadeer?<Loader/>:""}
-        <div className={Styles.Dashboard}>
+        <div className={`${Styles.Dashboard} min-h-screen`}> 
             <div className="flex flex-col items-center justify-start gap-8">
                 <div className={Styles.Logo}><img src={userInfo?.Logo||''} style={{width:'100px',borderRadius:'5px'}}/></div>
                 <div className={`${Styles.LeftNavIcons} w-full flex flex-col items-center gap-2`}>
@@ -408,9 +408,6 @@ export default function Dashboard({ event}){
             </div>
             <div>
                 <div className={Styles.MakeNavFixed}>
-                    {/* <div className={Styles.NavOneForSearch}>
-                        <div>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn}>Download</Link>:<></>}</>}</div>
-                    </div> */}
                     <div className={Styles.NavOneForMenu} style={{borderBottom:"1px solid var(--blue)"}}>
                         <div style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
@@ -425,6 +422,9 @@ export default function Dashboard({ event}){
                             return <div onClick={()=>{FetchImagesByFolderName(null,item.split('/')[2],true);KeyStateValue(index)}} style={KeyState == index?{borderBottom:'2px solid var(--blue)'}:{}}>{item.split('/')[2]}</div>
                           })}
                       </>:<></>}
+                    </div>
+                    <div className={Styles.NavOneForSearch}>
+                        <div style={{marginBottom:"1em",width:"70%"}}>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>:<></>}</>}</div>
                     </div>
                 </div>
                 <div>
@@ -458,7 +458,7 @@ export default function Dashboard({ event}){
         <>
           <div>
           {videos.length > 0 ? (
-              <div className={Styles.videoCon}>
+              <div className={`${Styles.videoCon}`}>
                 {videos.map((videoKey) => (
                   <video key={videoKey} controls style={{maxHeight:"20em",maxWidth:"20em",objectFit:"contain"}}> 
                     <source src={`https://${process.env.NEXT_PUBLIC_AWS_BUCKET_NAME}.s3.amazonaws.com/${videoKey}`} type="video/mp4" />

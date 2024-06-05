@@ -17,7 +17,7 @@ import Image from 'next/image';
 export default function HomePage({UserID}) {
     const [Array,ArrayValue] = useState([]);
     const [TodayDate,TodayDateValue] = useState(0);
-    const [AddOpen,AddOpenValue] = useState(false);
+    const [AddOpen,AddOpenValue] = useState(true);
     const [NotToShow,NotToShowValue] = useState([]);
     const [AddInfom,AddInfoValue] = useState([]);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -76,39 +76,10 @@ export default function HomePage({UserID}) {
     },[])
   return (
     <>
-        <div className={Styles.NavSearchModel}>
-            <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
-            <div className={Styles.SearchModel}>
-                    <div onClick={handlePreviousMonth}><ArrowLeftIcon color="primary" style={{fontSize:"50px",color:'white',cursor:'pointer'}}/></div>
-                    <select
-                    style={{backgroundColor:"#2d3a63",color:'white',border:'none',fontSize:'20px',marginRight:'30px',marginLeft:'30px',cursor:'pointer',outline:'none'}}
-                    value={currentMonth}
-                    onChange={handleMonthChange} 
-                    >
-                    {[0,1,2,3,4,5,6,7,8,9,10,11].map(i =>{
-                            return <option key={i} value={i}>
-                               {new Date(0, i).toLocaleString('default', { month: 'short' })}
-                            </option>
-                    })}
-                    </select>
-                    <select
-                    style={{backgroundColor:"#2d3a63",color:'white',marginRight:'30px',border:'none',fontSize:'20px'}}
-                    value={currentYear}
-                    onChange={handleYearChange} 
-                    >
-                    {[0,1,2,3,4,5,6,7,8,9,10,11].map(i =>{
-                            return <option key={i} value={new Date().getFullYear() - 1 + i}>
-                                {new Date().getFullYear() - 1 + i}
-                            </option>
-                    })}
-                    </select>
-                    <div onClick={handleNextMonth}><ArrowRightIcon color="primary" style={{fontSize:"50px",color:'white',cursor:'pointer'}}/></div>
-            </div>
-            <div><TemporaryDrawer UserID={UserID}/></div>
-        </div>
-        <div className={Styles.MainContent}>
-            <div>
-                <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div>
+        <div className='flex min-h-screen' style={{backgroundColor:"var(--bg) !important"}}>
+            <div className='flex flex-col items-center pt-8 gap-6' style={{width:'20em'}}>
+                <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
+                {/* <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div> */}
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'60svh',justifyContent:'space-around'}}>
                     <EditLeftDrawer/>
                     <Link href="/"><Image width={100} height={100} src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/></Link>
@@ -116,61 +87,100 @@ export default function HomePage({UserID}) {
                     <ReportLeftDrawer/>
                 </div>:<></>}
             </div>
-            <div className={Styles.MainContentCalender}>
-                {NotToShow.map((item,index)=>{
-                    return <div className={Styles.calenderboxNone} key={index}></div>
-                })}
-                {Array.map((item)=>{
-                    return <div className={`${Styles.calenderbox} ${Styles.boxes}`} style={item[1] == `${TodayDate}`?{backgroundColor:"#a240e5"}:{}}>
-                        <div className={Styles.calenderboxDate} style={item[1] == `${TodayDate}`?{color:"#fff"}:{}}>{item[1]}</div>
-                        {AddInfom.map((it,ind)=>{
-                            if(it[0] == item[1]){
-                                return <><div className={Styles.EventNameBox} style={ColorAndBGcolor(it[2])} key={ind}><AddPayment uuid={it[3]} name={it[4]}/></div></>
-                            }
-                        })}
+            <div className={Styles.MainContent} style={{display:"flex",flexDirection:"column",width:'100%'}}>
+                <div className={Styles.NavSearchModel} style={{backgroundColor:"var(--bg)",display:"flex"}}>
+                    {/* <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div> */}
+                    <div className={Styles.SearchModel}>
+                            <div onClick={handlePreviousMonth}><ArrowLeftIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
+                            <select
+                            style={{color:'black',border:'none',outline:"none",fontSize:'16px',marginRight:'10px',marginLeft:'10px',cursor:'pointer',outline:'none',backgroundColor:"var(--bg)"}}
+                            value={currentMonth}
+                            onChange={handleMonthChange} 
+                            >
+                            {[0,1,2,3,4,5,6,7,8,9,10,11].map(i =>{
+                                    return <option key={i} value={i}>
+                                    {new Date(0, i).toLocaleString('default', { month: 'short' })}
+                                    </option>
+                            })}
+                            </select>
+                            <select
+                            style={{backgroundColor:"var(--bg)",color:'black',marginRight:'10px',border:'none',outline:"none",fontSize:'16px'}}
+                            value={currentYear}
+                            onChange={handleYearChange} 
+                            >
+                            {[0,1,2,3,4,5,6,7,8,9,10,11].map(i =>{
+                                    return <option key={i} value={new Date().getFullYear() - 1 + i}>
+                                        {new Date().getFullYear() - 1 + i}
+                                    </option>
+                            })}
+                            </select>
+                            <div onClick={handleNextMonth}><ArrowRightIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
                     </div>
-                })}
+                    <div><TemporaryDrawer UserID={UserID}/></div>
+                </div>
+                <div className='flex gap-6 items-center w-full justify-end mb-4'>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#C870E0",color:"#000"}}></div>Lead</div>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#5079F9",color:"#000"}}></div>Advance paid</div>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#6E5FD3",color:"#000"}}></div>Editing</div>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#7BE276",color:"#000"}}></div>Event completed</div>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#EBBA54",color:"#000"}}></div>Balance settled</div>
+                    <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#F06976",color:"#000"}}></div>Delivered</div>
+                </div>
+                <div className={Styles.MainContentCalender}>
+                    {NotToShow.map((item,index)=>{
+                        return <div className={Styles.calenderboxNone} key={index}></div>
+                    })}
+                    {Array.map((item)=>{
+                        return <div className={`${Styles.calenderbox} ${Styles.boxes}`} style={item[1] == `${TodayDate}`?{backgroundColor:"var(--darkblue)"}:{}}>
+                            <div className={Styles.calenderboxDate} style={item[1] == `${TodayDate}`?{color:"#fff"}:{}}>{item[1]}</div>
+                            {AddInfom.map((it,ind)=>{
+                                if(it[0] == item[1]){
+                                    return <><div className={Styles.EventNameBox} style={ColorAndBGcolor(it[2])} key={ind}><AddPayment uuid={it[3]} name={it[4]}/></div></>
+                                }
+                            })}
+                        </div>
+                    })}
+                </div>
             </div>
         </div>
     </>
   )
 }
-
-
+    
 export function ColorAndBGcolor(status){
     if(status==''|| !status){
         return {
-            backgroundColor:"#1e2742",
+            backgroundColor:"#4F55C3;",
             color:"white"
         }
     }else if(status=='Lead'){
         return {
-            backgroundColor:"white",
+            backgroundColor:"#C870E0",
             color:"black"
         }
     }else if(status=='Advance paid'){
         return {
-            backgroundColor:"#ff1493",
+            backgroundColor:"#5079F9",
             color:"white"
         }
     }else if(status=='Editing'){
         return {
-            backgroundColor:"#f7b02f",
+            backgroundColor:"#6E5FD3",
             color:"white"
         }
     }else if(status=='Event completed'){
         return {
-            backgroundColor:"#ff6347",
+            backgroundColor:"#7BE276",
             color:"white"
         }
     }else if(status=='Balance settled'){
         return {
-            backgroundColor:"#148158",
+            backgroundColor:"#EBBA54",
             color:"white"
         }
     }else if(status=='Delivered'){
         return {
-            backgroundColor:"#1677a3",
+            backgroundColor:"#F06976",
             color:"white"
         }
     }
@@ -185,3 +195,4 @@ export function DatePickerIcon({setValue}){
       setValue(`${year}-${month<10?`0${month}`:month}-${date<10?`0${date}`:date}`);
     }}/></LocalizationProvider></div></div>
 }
+

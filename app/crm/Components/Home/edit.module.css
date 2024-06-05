@@ -1,19 +1,17 @@
 .NavSearchModel{
     display: flex;
-    justify-content: space-around;
-    margin: 50px 0;
+    justify-content: space-between;
     width: 100%;
 }
 .NavSearchModel > div:nth-child(1){
     color: white;
-    font-size: 50px;
     font-weight: bolder;
+    margin-left: 2em;
 }
 .NavSearchModel > div:nth-child(2){
     height: min-content;
 }
 .ForBackButton{
-    background-color: #ffffff0f;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -28,22 +26,30 @@
     flex-direction: column;
 }
 .SearchModel{
-    background-color: #1E2742;
     border-radius: 25px;
-    width: 45vw;
     display: flex;
+    width: 55%;
     align-items: center;
     justify-content: space-between;
   }
   .SearchModel > input{
-    background-color: #1E2742;
+    background-color: var(--white);
     border: none;
-    border-radius: 25px;
+    border-radius: 5px;
     width: 100%;
-    text-align: center;
-    padding: 1vw;
-    color: white;
+    padding: 4px 10px;
+    color: black;
     outline: none;
+    font-weight: 100;
+  }
+  .searchBtn{
+    padding: 4px 16px;
+    background-color: var(--pink);
+    color: white;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-weight: 100;
+    font-size: 14px;
   }
   .NavSearchModel > div > img{
     cursor: pointer;
@@ -54,6 +60,9 @@
   .TableTag{
     display: flex;
     justify-content: center;
+  }
+  .TableTag * {
+    font-size: 14px;
   }
   .TableTag > table > thead > tr > th{
     color: white;
@@ -120,6 +129,11 @@
     display: flex;
     align-items: center;
   }
+  .profile{
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
   .PieChartCssPrice{
     display: flex;
     flex-direction: column;
@@ -154,7 +168,6 @@
   .AddModelButton{
     display: flex;
     justify-content: flex-end;
-    margin-right: 15vw;
   }
   .FooterButton{
     max-width: 50vw;
@@ -188,6 +201,37 @@
   .DrawermapdataCenter{
     display: flex;
   }
+  .customTable {
+    display: table;
+    width: 100%;
+  }
+  
+  .customThead {
+    display: table-header-group;
+  }
+  
+  .customTbody {
+    display: table-row-group;
+  }
+  
+  .customTr {
+    display: table-row;
+  }
+  
+  .customTh, .customTd {
+    display: table-cell;
+    padding: 8px 16px;
+    border-bottom: 1px solid #9AC5F4;
+  }
+  
+  .customTh {
+    font-weight: bold;
+  }
+  
+  .customTd {
+    text-align: center;
+  }
+  
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .TableTag{
       overflow: auto;
@@ -282,4 +326,19 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.backBtn{
+  position: absolute;
+  top: -8%;
+  left: 1%;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #000;
+  padding: 2px 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: .5em;
 }
