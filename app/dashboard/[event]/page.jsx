@@ -1,5 +1,5 @@
 'use server'
-import SignIn from "@/app/Components/SignIndashboard/page";
+import SignIn from "@/app/components/SignIndashboard/page";
 import { unstable_noStore as noStore } from 'next/cache';
 import { cookies } from 'next/headers'
 import { createClient } from '@supabase/supabase-js'
