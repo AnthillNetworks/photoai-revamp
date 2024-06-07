@@ -70,3 +70,12 @@ h3 {
 .css-ezskuf-MuiSkeleton-root{
   background-color: rgba(23, 123, 229, .6) !important;
 }
+
+.homestyle_datePicker__wK2EV .MuiInputAdornment-root{
+  margin-right: 1em !important;
+}
+
+.homestyle_datePicker__wK2EV .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:nth-child(1) {
+  margin-top: 3px;
+  width: 100% !important;
+}

@@ -116,7 +116,7 @@
   .ReportsFilters{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .PieChartCss{
     width: 250px;
@@ -231,7 +231,28 @@
   .customTd {
     text-align: center;
   }
-  
+
+  .datePickerCon {
+    border: 1px solid #4F55C3;
+    border-radius: 5px;
+  }
+
+  .datePickerCon *{
+    border: none !important;
+    padding: 0em !important;
+    color: #4F55C3 !important;
+  }
+  .label{
+    font-size: 15px;
+  }
+  .inputCon {
+    background: none;
+    border: 1px solid var(--darkblue);
+    padding: 4px 6px;
+    border-radius: 5px;
+    color: #4F55C3;
+  }
+
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .TableTag{
       overflow: auto;
