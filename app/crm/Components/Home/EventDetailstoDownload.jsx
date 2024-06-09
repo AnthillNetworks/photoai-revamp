@@ -13,19 +13,37 @@ import { ColorAndBGcolor } from './page';
 import UpdateEventDetails from './UpdateCustomerDetail';
 import sendsmscrm from '../../SendSMS';
 import EventDetailsSendBtn from './EventDetailsSendBtn';
+import Image from 'next/image';
 export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile})=>{
   const [StatusValue,SetStatusValue] = React.useState(item.Status);
   let AdvanceAmount = 0;
   item.Advance_Payment.map((it)=>{
     AdvanceAmount += +it.Advance;
   })
-  return <tr>
-    <td><AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} Mobile={Mobile}/></td>
-    <td>{item.EventDate}</td>
-    <td>{item.Full_Amount.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-    <td>{AdvanceAmount.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-    <td>{(+item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-    <td><select style={{...ColorAndBGcolor(StatusValue),border:'none',outline:'none',cursor:'pointer',fontSize:'20px'}} value={StatusValue} onChange={(e)=>{SetStatusValue(e.target.value),OnStatusChange(item.EventID,e.target.value)}}>
+  return <div className={Style.customTableRow}>
+  <div className={Style.customTableCell}>
+    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} Mobile={Mobile} />
+  </div>
+  <div className={Style.customTableCell}>{item.EventDate}</div>
+  <div className={Style.customTableCell}>
+    {item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+  </div>
+  <div className={Style.customTableCell}>
+    {AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+  </div>
+  <div className={Style.customTableCell}>
+    {(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+  </div>
+  <div className={Style.customTableCell}>
+    <select
+      className={Style.customSelect}
+      style={{...ColorAndBGcolor(StatusValue), border: 'none', outline: 'none',color:"black",cursor: 'pointer', fontSize: '16px',borderRadius:"5px",padding:"4px"}}
+      value={StatusValue}
+      onChange={(e) => {
+        SetStatusValue(e.target.value);
+        OnStatusChange(item.EventID, e.target.value);
+      }}
+    >
       <option value="">Status</option>
       <option value="Lead" style={ColorAndBGcolor('Lead')}>Lead</option>
       <option value="Advance paid" style={ColorAndBGcolor('Advance paid')}>Advance paid</option>
@@ -33,9 +51,18 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
       <option value="Event completed" style={ColorAndBGcolor('Event completed')}>Event completed</option>
       <option value="Balance settled" style={ColorAndBGcolor('Balance settled')}>Balance settled</option>
       <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
-      </select></td>
-      <td style={{border:'none',backgroundColor:'#13192f'}}><img style={{width:'20px',cursor:'pointer'}} onClick={()=>{if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}} src={ConstCheckedData?.EventID != item.EventID?'/svg/CheckedFalse.svg':'/svg/CheckedTrue.svg'} alt="" /></td>
-  </tr>
+    </select>
+  </div>
+  <div className={Style.customTableCell} style={{border: 'none', backgroundColor:"var(--bg)"}}>
+    <img
+      className={Style.customImage}
+      style={{width: '20px', cursor: 'pointer'}}
+      onClick={() => {if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}}
+      src={ConstCheckedData?.EventID !== item.EventID ? '/svg/CheckedFalse.svg' : '/svg/CheckedTrue.svg'}
+      alt=""
+    />
+  </div>
+</div>
 }
 export default function EventDetailsToDownload({id,name,Mobile}) {
     const [Data,SetData] = React.useState([]);
@@ -146,69 +173,110 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
     }
   }
   const list = (anchor) => (
-    <Box className={Style.DrawerCenter} style={{backgroundColor:"#13192f"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-            <div className={Style.NavSearchModel}>
-                <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_263_943)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.94063 13.0599C7.65973 12.7787 7.50195 12.3974 7.50195 11.9999C7.50195 11.6024 7.65973 11.2212 7.94063 10.9399L13.5966 5.2819C13.878 5.00064 14.2596 4.84268 14.6575 4.84277C14.8545 4.84282 15.0495 4.88167 15.2315 4.9571C15.4135 5.03253 15.5789 5.14307 15.7181 5.2824C15.8574 5.42173 15.9679 5.58713 16.0432 5.76915C16.1186 5.95117 16.1573 6.14625 16.1573 6.34325C16.1572 6.54025 16.1184 6.73531 16.0429 6.9173C15.9675 7.09929 15.857 7.26463 15.7176 7.4039L11.1226 11.9999L15.7186 16.5959C15.862 16.7342 15.9763 16.8997 16.055 17.0826C16.1337 17.2656 16.1752 17.4624 16.177 17.6616C16.1788 17.8607 16.141 18.0583 16.0656 18.2427C15.9903 18.427 15.879 18.5946 15.7382 18.7355C15.5975 18.8764 15.43 18.9878 15.2457 19.0633C15.0614 19.1389 14.8639 19.1769 14.6647 19.1753C14.4656 19.1736 14.2687 19.1323 14.0857 19.0538C13.9026 18.9753 13.7371 18.8611 13.5986 18.7179L7.93863 13.0599H7.94063Z" fill="white"/></g><defs><clipPath id="clip0_263_943"><rect width="24" height="24" fill="white"/></clipPath></defs></svg></div>
-                <div className={Style.SearchModel}>
-                    <input type="text" placeholder="Search" onChange={(e)=>{SetData(searchFun(e.target.value,ConstData))}}/>
-                    <img src="/svg/crmsearch.svg" alt="search" />
-                </div>
-                <div></div>
+    <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+ 
+      <div className='w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto"}}>
+        
+        {/* Header */}
+        <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
+          <div className='w-full px-4 py-2 flex gap-4 items-center'>
+            <div className={Style.ForBackButton} onClick={()=>{setState({ ...state, [anchor]: false })}}>
+              {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_263_943)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.94063 13.0599C7.65973 12.7787 7.50195 12.3974 7.50195 11.9999C7.50195 11.6024 7.65973 11.2212 7.94063 10.9399L13.5966 5.2819C13.878 5.00064 14.2596 4.84268 14.6575 4.84277C14.8545 4.84282 15.0495 4.88167 15.2315 4.9571C15.4135 5.03253 15.5789 5.14307 15.7181 5.2824C15.8574 5.42173 15.9679 5.58713 16.0432 5.76915C16.1186 5.95117 16.1573 6.14625 16.1573 6.34325C16.1572 6.54025 16.1184 6.73531 16.0429 6.9173C15.9675 7.09929 15.857 7.26463 15.7176 7.4039L11.1226 11.9999L15.7186 16.5959C15.862 16.7342 15.9763 16.8997 16.055 17.0826C16.1337 17.2656 16.1752 17.4624 16.177 17.6616C16.1788 17.8607 16.141 18.0583 16.0656 18.2427C15.9903 18.427 15.879 18.5946 15.7382 18.7355C15.5975 18.8764 15.43 18.9878 15.2457 19.0633C15.0614 19.1389 14.8639 19.1769 14.6647 19.1753C14.4656 19.1736 14.2687 19.1323 14.0857 19.0538C13.9026 18.9753 13.7371 18.8611 13.5986 18.7179L7.93863 13.0599H7.94063Z" fill="white"/></g><defs><clipPath id="clip0_263_943"><rect width="24" height="24" fill="white"/></clipPath></defs></svg> */}
+              <img src="/assets/backbtn.svg" alt="Back" style={{width:"20px",height:"20px"}}/>
             </div>
-            <div className={Style.inputcontainerFilter}>
-              <div className={Style.inputcontainerFilters}>
-                <div style={{color:'white',marginRight:'5vw',textTransform:'capitalize'}}>{name}</div>
+            <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers Details</div>
+          </div>
+          <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div>
+        </div>
+
+        {/* Details */}
+        <div className='flex w-full gap-64 pl-8 items-stretch pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
+          <div className='flex flex-col gap-3'>
+            <div className='text-xl font-bold' style={{color:"var(--blue)"}}>Wade Warren</div>
+            <div className='text-lg font-bold' style={{color:"var(--blue)"}}>Bangalore</div>
+            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>(406) 555-0120</div></div>
+            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>felicia.reid@example.com</div></div>
+          </div>
+          <div className='flex flex-col justify-between gap-10'>
+            <div className='text-xl'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance</div><div style={{color:"var(--pink)"}}>$3200</div></div>
+            <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
+          </div>
+          <div>
+            { ConstCheckedData ? <>
+                <div style={{marginLeft:'10vw'}}>
+                  <div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
+                  <div><img src='/DeleteCrm.svg' style={{cursor:'pointer'}} onClick={HandelDelete}/></div>
+                </div>  </>: <></>
+            }
+          </div>
+        </div>
+
+        {/* DateCon */}
+
+        <div className='pl-8 my-4 flex items-center justify-between w-full'>
+          <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
+          <div className='flex gap-6'>
+            <div onClick={()=>{downloadCSVFunction()}} style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div>
+            <div><CreateEvent id={id} FetchEventsByUUID={FetchEventsByUUID}/></div>
+          </div>
+        </div>
+        <div className='pl-8 my-4 flex items-center w-full'>  
+          <div>
+              <div className='flex gap-4'>
                 <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">Start Date</label><DatePickerIcon setValue={SetStartDate}/></div></div>
                 <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">End Date</label><DatePickerIcon setValue={SetEndDate}/></div></div>
               </div>
-              <CreateEvent id={id} FetchEventsByUUID={FetchEventsByUUID}/>
+          </div>
+          <div className={`flex gap-2 bg-white items-center`} style={{borderRadius:"5px",padding:"4px 8px",minWidth:'fit-content',boxShadow:"0px 2px 2px 0px rgba(0, 0, 0, 0.25)"}}>
+            <div><img src="/assets/srh.svg" alt="Search" style={{width:"18px",height:"18px",outline:"none",border:"none"}}/></div>
+            <div className='w-full'>
+              <input type="text" placeholder="Search" className='w-full outline-none border-none' onChange={(e)=>{SetData(searchFun(e.target.value,ConstData))}}/>
             </div>
-            <div className={Style.TableTag}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Event Name</th>
-                      <th>Date</th>
-                      <th>Full Amount</th>
-                      <th>Paid Amount</th>
-                      <th>Balance</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Data.map((item,index)=>{
-                      return <TableCkeckBox item={item} ConstCheckedData={ConstCheckedData} cusname={name} SetConstCheckedData={SetConstCheckedData} key={index} OnStatusChange={OnStatusChange} Mobile={Mobile}/>
-                    })}
-                    <tr>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}>Total</td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}>{total.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-                    </tr>
-                  </tbody>
-                </table>
+        </div>
+        </div>
+
+        {/* Table */}
+
+        <div className={Style.customTableContainer}>
+          <div className={Style.customTable}>
+            <div className={Style.customTableHeader}>
+              <div className={Style.customTableRow}>
+                <div className={Style.customTableCell}>Event Name</div>
+                <div className={Style.customTableCell}>Date</div>
+                <div className={Style.customTableCell}>Full Amount</div>
+                <div className={Style.customTableCell}>Paid Amount</div>
+                <div className={Style.customTableCell}>Balance</div>
+                <div className={Style.customTableCell}>Status</div>
+              </div>
             </div>
-            <div style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'center',marginTop:'50px'}}>
-                <div style={{maxWidth:'500px',width:'100%',display:'flex',justifyContent:'space-between'}}>
-                    {/* <button onClick={()=>{HandelSendSMS()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Send Update</button> */}
-                    
-                    {/* Updated Code */}
-                    <EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} />
-                    <button onClick={()=>{downloadCSVFunction()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'15px 20px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Download as CSV</button>
+            <div className={Style.customTableBody}>
+              {Data.map((item, index) => (
+                <TableCkeckBox
+                  item={item}
+                  ConstCheckedData={ConstCheckedData}
+                  cusname={name}
+                  SetConstCheckedData={SetConstCheckedData}
+                  key={index}
+                  OnStatusChange={OnStatusChange}
+                  Mobile={Mobile}
+                />
+              ))}
+              {/* <div className={Style.customTableRow}>
+                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
+                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
+                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
+                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}>Total</div>
+                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}>
+                  {total.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
                 </div>
-                {ConstCheckedData?<>
-                  <div style={{marginLeft:'10vw'}}>
-                      <div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
-                      <div><img src='/DeleteCrm.svg' style={{cursor:'pointer'}} onClick={HandelDelete}/></div>
-                </div>
-                </>:<>
-                <div>
-                      <div></div>
-                      <div></div>
-                </div>
-                </>}
+              </div> */}
             </div>
+          </div>
+        </div>
+
+
+      </div>
+
     </Box>
   );
 

@@ -186,7 +186,7 @@ export function ColorAndBGcolor(status){
     }
 }
 export function DatePickerIcon({setValue}){
-    return <div style={{border:'1px solid #898d9c',padding:'10px 20px 10px 10px',borderRadius:'5px'}}><div className={Styles.datePicker}><LocalizationProvider dateAdapter={AdapterDayjs}>
+    return <div style={{border:'1px solid var(--blue)',color:"var(--blue)",borderRadius:'5px'}}><div className={Styles.datePicker}><LocalizationProvider dateAdapter={AdapterDayjs}>
     <DatePicker
     onChange={(newValue) => {
         let date = newValue["$D"];
