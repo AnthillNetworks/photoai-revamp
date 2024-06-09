@@ -10,6 +10,7 @@ import { GetCustomerFuntion,GetCustomerByStartAndEndDate,GetCustomerByStartAndEn
 import { DatePickerIcon } from './page';
 import Image from 'next/image';
 import { Padding } from '@mui/icons-material';
+import ExamplePieChart from './Charts';
 export default function ReportLeftDrawer() {
   const [StartDate,SetStartDate] = React.useState('')
   const [Data,DataSet] = React.useState([]);
@@ -133,6 +134,7 @@ export default function ReportLeftDrawer() {
     //                   })}
     //                 </datalist></div></div>
     //             </div>
+    // 
     //             <div>
     //               <div className={Style.CustomerDiv}>
     //                 <div className={Style.CustomerName}>{CusName == ''?'Over All':CusName}</div>
@@ -213,6 +215,37 @@ export default function ReportLeftDrawer() {
                 </div>
               </div>
             </div>
+
+            {/* AmountCon */}
+            <div className='mt-8 flex flex-wrap items-center gap-4 w-full pl-8'>
+              <div className='flex flex-col items-start bg-white justify-between px-4 py-6' style={{boxShadow:"rgba(0, 0, 0, 0.3) 0px 2px 2px 0px",borderRadius:"10px"}}>
+                <div className='text-sm font-normal text-black'>Total Revenue</div>
+                <div className='flex gap-1'><img src="/assets/rupee.svg" alt="Rupee" style={{width:"12px"}} /><div style={{color:"var(--orange)",fontSize:"34px"}} >{Tot.toLocaleString('en-IN', {currency: 'INR'})}</div></div>
+              </div>
+              <div className='flex flex-col items-start bg-white justify-between px-4 py-6' style={{boxShadow:"rgba(0, 0, 0, 0.3) 0px 2px 2px 0px",borderRadius:"10px"}}>
+                <div className='text-sm font-normal text-black'>Paid Amount</div>
+                <div className='flex gap-1'><img src="/assets/rupee.svg" alt="Rupee" style={{width:"12px"}} /><div style={{color:"var(--orange)",fontSize:"34px"}} >{(Tot-Bal).toLocaleString('en-IN', {currency: 'INR'})}</div></div>
+              </div>
+              <div className='flex flex-col items-start bg-white justify-between px-4 py-6' style={{boxShadow:"rgba(0, 0, 0, 0.3) 0px 2px 2px 0px",borderRadius:"10px"}}>
+                <div className='text-sm font-normal text-black'>Balance Amount</div>
+                <div className='flex gap-1'><img src="/assets/rupee.svg" alt="Rupee" style={{width:"12px"}} /><div style={{color:"var(--orange)",fontSize:"34px"}} >{Bal.toLocaleString('en-IN', {currency: 'INR'})}</div></div>
+              </div>
+            </div>
+
+            {/* Charts */}
+            <div className='bg -white w-full mt-6 mb-4'>
+              <div className='flex items-start pl-8' style={{position:"relative"}}>
+                <ExamplePieChart Bal={Bal} Tot={Tot} />
+                {/* Legends */}
+                <div style={{position:"absolute",top:"45%",right:"40%"}}>
+                  <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--red)"}}></div><div style={{fontSize:"14px"}}>Total Revenue</div></div>
+                  <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--paid)"}}></div><div style={{fontSize:"14px"}}>Paid Amount</div></div>
+                  <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--bal)"}}></div><div style={{fontSize:"14px"}}>Balance Amount</div></div>
+                </div>
+              </div>
+            </div>
+
+            
         </div>
     </Box>
   );
