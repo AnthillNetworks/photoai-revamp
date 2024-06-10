@@ -280,7 +280,7 @@
 
   .customTableContainer {
     max-height: 70vh;
-    margin: 3em 0;
+    margin: 1em 0 2em 0;
     overflow: scroll;
   }
   
@@ -329,6 +329,55 @@
     background-color: var(--white);
   }
  
+  .tableContainer {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tableHeader, .tableBody {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tableRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid var(--blue);
+  }
+  
+  .tableHeaderCell, .tableCell {
+    padding: 8px;
+    flex: 1;
+    border-right: 1px solid var(--blue);
+  }
+  
+  .tableHeaderCell {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .tableCell {
+    background-color: var(--white);
+    color: black;
+  }
+  
+  .tableCell:last-child, .tableHeaderCell:last-child {
+    border-right: none;
+  }
+  
+  .deleteIcon {
+    flex: 0 0 auto;
+    margin-left: 8px;
+  }  
+
   @media (max-width: 768px) {
     .customTableCell {
       display: block;

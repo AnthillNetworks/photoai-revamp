@@ -173,9 +173,9 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
     }
   }
   const list = (anchor) => (
-    <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+    <Box className={`${Style.DrawerCenter} min-h-screen overflow-scroll`} style={{backgroundColor:"var(--bg)",overflow:"scroll !important"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
  
-      <div className='w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto"}}>
+      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll !important"}}>
         
         {/* Header */}
         <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
@@ -198,7 +198,7 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
             <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>felicia.reid@example.com</div></div>
           </div>
           <div className='flex flex-col justify-between gap-10'>
-            <div className='text-xl'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance</div><div style={{color:"var(--pink)"}}>$3200</div></div>
+            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$3200</div></div>
             <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
           </div>
           <div>
@@ -212,7 +212,6 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
         </div>
 
         {/* DateCon */}
-
         <div className='pl-8 my-4 flex items-center justify-between w-full'>
           <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
           <div className='flex gap-6'>

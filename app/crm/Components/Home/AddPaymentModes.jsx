@@ -62,7 +62,7 @@ export default function AddPaymentModes({uuid,name,GetAllAmount}) {
     <div>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)}><button style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'15px 20px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Add Payment</button></div>
+          <div onClick={toggleDrawer(anchor, true)}><button style={{border:'none',borderRadius:'5px',fontSize:'13px',padding:'8px 2em',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Add Payment</button></div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}
           </Drawer>

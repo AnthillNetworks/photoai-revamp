@@ -28,7 +28,7 @@ function PaymentUpdateSendBtn({cusname,total,Mobile,name,totalAmount}) {
 
     return (
     <div>
-        <button onClick={()=>{handleClickOpen()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'15px 20px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Send Update</button>            
+        <button onClick={()=>{handleClickOpen()}} style={{border:'none',borderRadius:'5px',fontSize:'13px',padding:'8px 3em', marginTop:'15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Send Update</button>            
         <Dialog open={open} TransitionComponent={Transition} transitionDuration={{ appear: 600, enter: 600, exit: 600 }} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
             <div style={{backgroundColor:'#1e2742',padding:'30px 50px',borderRadius:'0'}}>
                 <div style={{color:'white', fontSize:'20px'}}>Do You Want to Send Update</div>
