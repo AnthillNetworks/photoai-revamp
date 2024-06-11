@@ -190,7 +190,7 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
         </div>
 
         {/* Details */}
-        <div className='flex w-full gap-64 pl-8 items-stretch pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
+        <div className='flex w-full pl-8 justify-between pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
           <div className='flex flex-col gap-3'>
             <div className='text-xl font-bold' style={{color:"var(--blue)"}}>Wade Warren</div>
             <div className='text-lg font-bold' style={{color:"var(--blue)"}}>Bangalore</div>
@@ -201,11 +201,11 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
             <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$3200</div></div>
             <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
           </div>
-          <div>
+          <div className='flex items-center'>
             { ConstCheckedData ? <>
-                <div style={{marginLeft:'10vw'}}>
-                  <div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
-                  <div><img src='/DeleteCrm.svg' style={{cursor:'pointer'}} onClick={HandelDelete}/></div>
+                <div className='flex flex-col justify-between gap-6'>
+                  <div className='flex gap-3 items-end justify-end'><div style={{fontSize:'14px',color:"#A0A0A0"}}>Edit</div><UpdateEventDetails FetchCustomerData={FetchEventsByUUID} Data={ConstCheckedData}/></div>
+                  <div className='flex gap-3 items-end justify-end'><div style={{fontSize:'14px',color:"#A0A0A0"}}>Delete</div><img src='/assets/del.svg' style={{cursor:'pointer',width:"24px",height:"24px"}} onClick={HandelDelete}/></div>
                 </div>  </>: <></>
             }
           </div>

@@ -356,11 +356,11 @@
   .tableHeaderCell, .tableCell {
     padding: 8px;
     flex: 1;
-    border-right: 1px solid var(--blue);
+    text-align: center;
   }
   
   .tableHeaderCell {
-    background-color: #f4f4f4;
+    background-color: var(--white);
     font-weight: bold;
   }
   

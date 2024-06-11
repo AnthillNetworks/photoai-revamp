@@ -106,22 +106,27 @@ export default function AddPayment({uuid,name,cusname,Mobile}) {
 
         {/* Table */}
         <div className={Style.tableContainer}>
-          <div className={Style.table}>
+          <div className={`${Style.table} bg-white`}>
             <div className={Style.tableHeader}>
               <div className={Style.tableRow}>
                 <div className={Style.tableHeaderCell}>Date</div>
                 <div className={Style.tableHeaderCell} style={{ minWidth: '300px' }}>Mode of Payment</div>
                 <div className={Style.tableHeaderCell}>Amount</div>
+                <div style={{flex:".25"}} className={Style.tableHeaderCell}> </div>
               </div>
             </div>
             <div className={Style.tableBody}>
               {Data.map((item, index) => (
                 <>
-                  <div className={Style.tableRow} key={index}>
+                  <div className={`${Style.tableRow} bg-white`} key={index}>
                     <div className={Style.tableCell} style={{ color: 'black', textDecoration: 'none' }}>{item.Date}</div>
                     <div className={Style.tableCell}>{item.Mode_Of_Payment}</div>
-                    <div className={Style.tableCell}>{(+item.Advance).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
-                    <DeleteIcon className={Style.deleteIcon} style={{ cursor: 'pointer' }} onClick={() => { HandelDelete(index) }} />
+                    <div className={`${Style.tableCell}`}>
+                      {(+item.Advance).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
+                    </div>
+                    <div style={{flex:".25"}}>
+                      <DeleteIcon className={Style.deleteIcon} style={{ cursor: 'pointer' }} onClick={() => { HandelDelete(index) }} />
+                    </div>
                   </div>
                 </>
               ))}

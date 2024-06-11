@@ -86,7 +86,7 @@ export default function UpdateEventDetails({FetchCustomerData,Data}){
     <div>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)}><img src='/editcrm.svg' style={{marginBottom:'20px',marginLeft:'9px',cursor:'pointer'}}/></div>
+          <div onClick={toggleDrawer(anchor, true)}><img src='/assets/edit.svg' style={{width:"24px",height:"24px",cursor:'pointer'}}/></div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}
           </Drawer>
