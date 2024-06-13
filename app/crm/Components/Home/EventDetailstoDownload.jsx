@@ -22,7 +22,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
   })
   return <div className={Style.customTableRow}>
   <div className={Style.customTableCell}>
-    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} Mobile={Mobile} />
+    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} Mobile={Mobile} item={item.EventDate} ConstCheckedData={ConstCheckedData} SetConstCheckedData={SetConstCheckedData} />
   </div>
   <div className={Style.customTableCell}>{item.EventDate}</div>
   <div className={Style.customTableCell}>
@@ -283,7 +283,9 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
     <div>
       {['bottom'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)}>{name}</div>
+          <div onClick={toggleDrawer(anchor, true)}>
+            {name}
+          </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}
           </Drawer>

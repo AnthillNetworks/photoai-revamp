@@ -10,7 +10,7 @@ import downloadCSV from './DownloadCSV';
 import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import PaymentUpdateSendBtn from './PaymentUpdateSendBtn';
 import Image from 'next/image';
-export default function AddPayment({uuid,name,cusname,Mobile}) {
+export default function AddPayment({uuid,name,cusname,Mobile,item,ConstCheckedData,SetConstCheckedData,OnOnStatusChange}) {
   const [Data,DataValue] = React.useState([]);
   const [total,Settotal] = React.useState(0);
   const [totalAmount,settotalAmount] = React.useState(0);
@@ -187,7 +187,12 @@ export default function AddPayment({uuid,name,cusname,Mobile}) {
     <div>
       {['bottom'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)} style={{cursor:'pointer'}}>{name.split('-')[1].split('_').join(' ')}</div>
+          <div onClick={toggleDrawer(anchor, true)} style={{cursor:'pointer'}}>
+            <div>
+              {name.split('-')[1].split('_').join(' ')}
+            </div>
+            {/* <div className={Style.customTableCell}>{item}</div> */}
+          </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}
           </Drawer>

@@ -53,17 +53,33 @@ export default function UpdateEventDetails({FetchCustomerData,Data}){
     }
   }
   const list = (anchor) => (
-    <Box className={Style.DrawerCenter} style={{backgroundColor:"#13192f"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+    <Box className={Style.DrawerCenter} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
         <div style={{width:'100vw',height:'100svh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-            <div style={{maxWidth:'700px',width:'100%',backgroundColor:'#1e2742',height:'100svh',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+            <div style={{position:"relative",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)",backgroundColor:'var(--white)',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',width:"50em",padding:"2em 5em",borderRadius:"20px"}}>
                 <form onSubmit={HandelSubmit} style={{maxWidth:'500px',width:'100%',display:'flex',flexDirection:'column'}}>
-                    <div style={{display:'flex',justifyContent:'space-between',width:'100%',marginBottom:'30px'}}>
-                        <div style={{color:'white',fontSize:'25px'}}>Update Event</div>
-                        <div><img src="/svg/Cross.svg" onClick={()=>{setState({ ...state, [anchor]: false })}} alt="" style={{cursor:'pointer'}} /></div>
+                    
+                    <div style={{display:'flex',justifyContent:'space-between',width:'100%',marginBottom:'10px'}}>
+                        <div style={{color:'var(--darkblue)',fontSize:'30px'}}>Update Event</div>
+                        <div onClick={()=>{setState({ ...state, [anchor]: false })}} className={Style.backBtn}> <img src="/assets/back.svg" alt="Back" style={{width:"12px",height:"12px"}} /> Back</div>
                     </div>
-                    <input type='text' value={EventName} onChange={(e)=>{EventNameValue(e.target.value)}} style={{width:'90%',backgroundColor:'#13192f',border:'1px solid gray',padding:'15px',borderRadius:'5px',fontSize:'15px',outline:'none',color:'white'}} placeholder="Event Name" required/>
-                    <div style={{width:'96.5%',backgroundColor:'#13192f'}}><DatePickerIcon setValue={SetEventDate}/></div>
-                    <input type='text' value={PaymentMode} list="nameOptions" onChange={(e)=>{SetPaymentMode(e.target.value)}} style={{width:'90%',backgroundColor:'#13192f',border:'1px solid gray',padding:'15px',borderRadius:'5px',fontSize:'15px',outline:'none',color:'white'}} placeholder="Mode of Payment" required/>
+
+                    <div>
+                      <label className='text-sm' htmlFor="name">Event Name</label>
+                      <input type='text' value={EventName} onChange={(e)=>{EventNameValue(e.target.value)}} style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}}  placeholder="Event Name" required/>
+                    </div>
+
+                    <div>
+                      <label className='text-sm' htmlFor="date"></label>
+                      <div style={{width:'90%',backgroundColor:'var(--white)',border:'none',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}}                     >
+                        <DatePickerIcon style={{border:"none !important"}} className={Style.eveDatepicker} setValue={SetEventDate}/>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className='text-sm' htmlFor="payment"></label>
+                      <input type='text' value={PaymentMode} list="nameOptions" onChange={(e)=>{SetPaymentMode(e.target.value)}} style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}} placeholder="Mode of Payment" required/>
+                    </div>
+
                     <datalist id="nameOptions">
                       <option value="Cash"/>
                       <option value="Debit cards"/>
@@ -72,10 +88,21 @@ export default function UpdateEventDetails({FetchCustomerData,Data}){
                       <option value="Cards"/>
                       <option value="UPI"/>
                     </datalist>
-                    <input type='number' value={FullAmount} onChange={(e)=>{FullAmountValue(e.target.value)}} style={{width:'90%',backgroundColor:'#13192f',border:'1px solid gray',padding:'15px',borderRadius:'5px',fontSize:'15px',outline:'none',color:'white'}} placeholder="Full Amount"/>
-                    <input type='number' value={Advance} onChange={(e)=>{AdvanceValue(e.target.value)}} style={{width:'90%',backgroundColor:'#13192f',border:'1px solid gray',padding:'15px',borderRadius:'5px',fontSize:'15px',outline:'none',color:'white'}} placeholder="Advance" disabled/>
-                    <input type='text' value={FullAmount-Advance} style={{width:'90%',backgroundColor:'#13192f',border:'1px solid gray',padding:'15px',borderRadius:'5px',fontSize:'15px',outline:'none',color:'white'}} placeholder="Balance Amount" disabled/>
-                    <button type='submit' style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'150px',padding:'15px 20px', marginTop:'15px',cursor:'pointer',backgroundColor:'#A240E5',color:'#fff'}}>Update</button>
+
+                    <div>
+                      <label className='text-sm'htmlFor="fullamount">Full Amount</label>
+                      <input type='number' value={FullAmount} onChange={(e)=>{FullAmountValue(e.target.value)}}style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}}  placeholder="Full Amount" required/>
+                    </div>
+                    <div>
+                      <label className='text-sm'htmlFor="advance">Advance</label>
+                      <input type='number' value={Advance} onChange={(e)=>{AdvanceValue(e.target.value)}} style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}} placeholder="Advance" required/>
+                    </div>
+                    <div>
+                      <label className='text-sm'htmlFor="balance">Balance</label>
+                      <input type='text' value={FullAmount-Advance} style={{width:'90%',backgroundColor:'var(--white)',border:'none',padding:'.4em .6em',borderRadius:'5px',fontSize:'15px',outline:'none',color:'black',margin:'5px 0',border:"1px solid var(--blue)"}} placeholder="Balance Amount" disabled/>
+                    </div>
+
+                    <button type='submit' style={{border:'none',borderRadius:'5px',fontSize:'13px',width:'90%',padding:'8px 2.5em', marginTop:'15px',cursor:'pointer',backgroundColor:'var(--pink)',color:'#fff'}}>Update</button>
                 </form>
             </div>
         </div>
