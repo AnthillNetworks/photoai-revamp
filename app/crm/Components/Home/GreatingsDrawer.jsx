@@ -170,7 +170,11 @@ export default function GreatingsLeftDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-        <div><img onClick={toggleDrawer(anchor, true)} src='/svg/GreatingsCrm.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/></div>
+        {/* <div><img onClick={toggleDrawer(anchor, true)} src='/svg/GreatingsCrm.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/></div> */}
+        <div onClick={toggleDrawer(anchor, true)} className='flex gap-2' style={{cursor:"pointer"}}>
+            <img src="/assets/ingreet.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
+            <div>Send Greetings</div>
+        </div>
         <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
           {list(anchor)}
         </Drawer>

@@ -80,9 +80,15 @@ export default function HomePage({UserID}) {
             <div className='flex flex-col items-center pt-8 gap-6' style={{width:'20em'}}>
                 <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
                 {/* <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div> */}
-                {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'60svh',justifyContent:'space-around'}}>
+                {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'30svh',justifyContent:'space-around'}}>
                     <EditLeftDrawer/>
-                    <Link href="/"><Image width={100} height={100} src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/></Link>
+                    <Link href="/">
+                        {/* <Image width={100} height={100} src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/> */}
+                        <div className='flex gap-2' style={{cursor:"pointer"}}>
+                            <img src="/assets/album.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
+                            <div>Ai Album</div>
+                        </div>
+                    </Link>
                     <GreatingsLeftDrawer/>
                     <ReportLeftDrawer/>
                 </div>:<></>}

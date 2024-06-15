@@ -10,7 +10,8 @@ import downloadCSV from './DownloadCSV';
 import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import PaymentUpdateSendBtn from './PaymentUpdateSendBtn';
 import Image from 'next/image';
-export default function AddPayment({uuid,name,cusname,Mobile,item,ConstCheckedData,SetConstCheckedData,OnOnStatusChange}) {
+export default function AddPayment({uuid,name,cusname,Mobile,item,ConstCheckedData,SetConstCheckedData,OnOnStatusChange,Location,Email_ID}) {
+  console.log({uuid,name,cusname,Mobile,item,ConstCheckedData,SetConstCheckedData,OnOnStatusChange},"---")
   const [Data,DataValue] = React.useState([]);
   const [total,Settotal] = React.useState(0);
   const [totalAmount,settotalAmount] = React.useState(0);
@@ -84,20 +85,22 @@ export default function AddPayment({uuid,name,cusname,Mobile,item,ConstCheckedDa
         {/* Details */}
         <div className='flex w-full gap-64 pl-8 items-stretch pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
           <div className='flex flex-col gap-3'>
-            <div className='text-xl font-bold' style={{color:"var(--blue)"}}>Wade Warren</div>
-            <div className='text-lg font-bold' style={{color:"var(--blue)"}}>Bangalore</div>
-            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>(406) 555-0120</div></div>
-            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>felicia.reid@example.com</div></div>
+            <div className='text-xl font-bold' style={{color:"var(--blue)"}}>{cusname}</div>
+            <div className='text-lg font-bold' style={{color:"var(--blue)"}}>{Location}</div>
+            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
+            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
+            <div className='text-sm flex gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Paid :</div><div style={{color:"var(--pink)"}}>$ {total}</div></div>
+            <div className='text-sm flex gap-2'><div className='text-sm font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {totalAmount-total}</div></div>
           </div>
           <div className='flex flex-col justify-between gap-10'>
-            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$3200</div></div>
+            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Total Amount :</div><div style={{color:"var(--pink)"}}>$ {totalAmount}</div></div>
               <div><PaymentUpdateSendBtn  name={name} total={total} totalAmount={totalAmount} cusname={cusname} Mobile={Mobile}/></div>
           </div>
         </div>
 
         {/* Con */}
         <div className='pl-8 my-4 flex items-center justify-between w-full'>
-          <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
+          <div style={{color:"var(--blue)",fontSize:"24px"}}>{name.split("-")[1]} Event</div>
           <div className='flex gap-6'>
             <div onClick={()=>{downloadCSV(Data)}} className='flex items-center' style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div>
             <div><AddPaymentModes uuid={uuid} name={name} GetAllAmount={GetAllAmount}/></div>

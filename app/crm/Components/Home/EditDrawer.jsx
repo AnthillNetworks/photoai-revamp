@@ -143,7 +143,7 @@ export default function EditLeftDrawer() {
                           />
                         </div>
                         <div className={Style.customTd} style={{ cursor: 'pointer' }}>
-                          <EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} />
+                          <EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID}/>
                         </div>
                         <div className={Style.customTd}>{item.Mobile}</div>
                         <div className={Style.customTd}>{item.Email_ID}</div>
@@ -199,11 +199,11 @@ export default function EditLeftDrawer() {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div>
-            <img onClick={toggleDrawer(anchor, true)} src='/svg/EditCrm.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/>
-            {/* <div onClick={toggleDrawer(anchor, true)} style={{cursor:"pointer"}}>
-              <img src="/assets/customer.svg" alt="Customer" style={{width: '24px',height:'24',objectFit:"contain",cursor:'pointer'}}/>
+            {/* <img onClick={toggleDrawer(anchor, true)} src='/svg/EditCrm.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/> */}
+            <div onClick={toggleDrawer(anchor, true)} className='flex gap-2' style={{cursor:"pointer"}}>
+              <img src="/assets/customer.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
               <div>Customers</div>
-            </div> */}
+            </div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}

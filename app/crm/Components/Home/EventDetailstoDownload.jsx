@@ -14,7 +14,8 @@ import UpdateEventDetails from './UpdateCustomerDetail';
 import sendsmscrm from '../../SendSMS';
 import EventDetailsSendBtn from './EventDetailsSendBtn';
 import Image from 'next/image';
-export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile})=>{
+import GetCustomerDetailsByName from './GetCustomerDetailsByName';
+export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID})=>{
   const [StatusValue,SetStatusValue] = React.useState(item.Status);
   let AdvanceAmount = 0;
   item.Advance_Payment.map((it)=>{
@@ -22,7 +23,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
   })
   return <div className={Style.customTableRow}>
   <div className={Style.customTableCell}>
-    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} Mobile={Mobile} item={item.EventDate} ConstCheckedData={ConstCheckedData} SetConstCheckedData={SetConstCheckedData} />
+    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} Mobile={Mobile} item={item.EventDate} ConstCheckedData={ConstCheckedData} SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID}/>
   </div>
   <div className={Style.customTableCell}>{item.EventDate}</div>
   <div className={Style.customTableCell}>
@@ -64,7 +65,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
   </div>
 </div>
 }
-export default function EventDetailsToDownload({id,name,Mobile}) {
+export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID}) {
     const [Data,SetData] = React.useState([]);
     const [ConstData,SetConstData] = React.useState([]);
     const [csvData,SetcsvData] = React.useState([]);
@@ -72,7 +73,7 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
     const [ConstCheckedData,SetConstCheckedData] = React.useState(null);
     const [EndDate,SetEndDate] = React.useState('')
     const [total,settotval] = React.useState(0);
-  const [state, setState] = React.useState({
+    const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
@@ -110,11 +111,15 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
     settotval(tot)
     SetData(response);
   }
+  const FetchCusDetailsByName = async () => {
+    const response = await GetCustomerDetailsByName(name);
+  }
   const OnStatusChange = async(EventID,e)=>{
     const response = await UpdateStatusByUUID(EventID,e);
   }
   React.useEffect(()=>{
     FetchEventsByUUID();
+    // FetchCusDetailsByName();
   },[]);
   const downloadCSVFunction = async()=>{
     const Array = [];
@@ -192,13 +197,13 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
         {/* Details */}
         <div className='flex w-full pl-8 justify-between pb-6' style={{borderBottom:"1px solid var(--blue)"}}>
           <div className='flex flex-col gap-3'>
-            <div className='text-xl font-bold' style={{color:"var(--blue)"}}>Wade Warren</div>
-            <div className='text-lg font-bold' style={{color:"var(--blue)"}}>Bangalore</div>
-            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>(406) 555-0120</div></div>
-            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>felicia.reid@example.com</div></div>
+            <div className='text-xl font-bold' style={{color:"var(--blue)",fontSize:"26px"}}>{name}</div>
+            <div className='text-lg font-bold' style={{color:"var(--blue)",fontSize:"16px"}}>{Location}</div>
+            <div className='flex gap-3 text-sm'><img src="/assets/call.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Mobile}</div></div>
+            <div className='flex gap-3 text-sm'><img src="/assets/msg.svg" alt="Call" /><div style={{color:"var(--blue)"}}>{Email_ID}</div></div>
           </div>
           <div className='flex flex-col justify-between gap-10'>
-            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)"}}>Balance :</div><div style={{color:"var(--pink)"}}>$3200</div></div>
+            <div className='text-xl flex gap-2'><div className='text-xl font-bold' style={{color:"var(--blue)",fontSize:"26px"}}>Balance :</div><div style={{color:"var(--pink)"}}>$ {`${total}`}</div></div>
             <div><EventDetailsSendBtn name={name} ConstCheckedData={ConstCheckedData} Mobile={Mobile} /></div>
           </div>
           <div className='flex items-center'>
@@ -258,6 +263,8 @@ export default function EventDetailsToDownload({id,name,Mobile}) {
                   key={index}
                   OnStatusChange={OnStatusChange}
                   Mobile={Mobile}
+                  Location={Location}
+                  Email_ID={Email_ID}
                 />
               ))}
               {/* <div className={Style.customTableRow}>
