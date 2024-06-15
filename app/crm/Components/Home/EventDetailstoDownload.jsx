@@ -15,17 +15,27 @@ import sendsmscrm from '../../SendSMS';
 import EventDetailsSendBtn from './EventDetailsSendBtn';
 import Image from 'next/image';
 import GetCustomerDetailsByName from './GetCustomerDetailsByName';
-export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID})=>{
+export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID,verbose})=>{
   const [StatusValue,SetStatusValue] = React.useState(item.Status);
   let AdvanceAmount = 0;
   item.Advance_Payment.map((it)=>{
     AdvanceAmount += +it.Advance;
   })
   return <div className={Style.customTableRow}>
+
   <div className={Style.customTableCell}>
-    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} Mobile={Mobile} item={item.EventDate} ConstCheckedData={ConstCheckedData} SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID}/>
+    <AddPayment uuid={item.Customer_ID_UUID} name={item.EventName} cusname={cusname} OnStatusChange={OnStatusChange} 
+    Mobile={Mobile} EventDate={item.EventDate} ConstCheckedData={ConstCheckedData} 
+    SetConstCheckedData={SetConstCheckedData} Location={Location} Email_ID={Email_ID} 
+    Full_Amount={item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})} 
+    AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+    Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
+    verbose={verbose}
+    />
+
   </div>
-  <div className={Style.customTableCell}>{item.EventDate}</div>
+
+  {/* <div className={Style.customTableCell}>{item.EventDate}</div>
   <div className={Style.customTableCell}>
     {item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
   </div>
@@ -34,7 +44,8 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
   </div>
   <div className={Style.customTableCell}>
     {(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-  </div>
+  </div> */}
+
   <div className={Style.customTableCell}>
     <select
       className={Style.customSelect}
@@ -65,7 +76,8 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
   </div>
 </div>
 }
-export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID}) {
+
+export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID,Balance,verbose}) {
     const [Data,SetData] = React.useState([]);
     const [ConstData,SetConstData] = React.useState([]);
     const [csvData,SetcsvData] = React.useState([]);
@@ -240,16 +252,17 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         </div>
 
         {/* Table */}
-
-        <div className={Style.customTableContainer}>
+        <div className={Style.customTableContainer} style={{width:"100%",overflow:"scroll"}}>
           <div className={Style.customTable}>
             <div className={Style.customTableHeader}>
               <div className={Style.customTableRow}>
-                <div className={Style.customTableCell}>Event Name</div>
-                <div className={Style.customTableCell}>Date</div>
-                <div className={Style.customTableCell}>Full Amount</div>
-                <div className={Style.customTableCell}>Paid Amount</div>
-                <div className={Style.customTableCell}>Balance</div>
+                <div style={{borderBottom:"1px solid var(--blue)",padding:"10px 20px",fontWeight:"bold"}}>
+                  <div className={Style.customTableCell1} style={{width:"10em"}}>Event Name</div>
+                  <div className={Style.customTableCell1} style={{width:"10em"}}>Date</div>
+                  <div className={Style.customTableCell1} style={{width:"10em"}}>Full Amount</div>
+                  <div className={Style.customTableCell1} style={{width:"10em"}}>Paid Amount</div>
+                  <div className={Style.customTableCell1} style={{width:"10em"}}>Balance</div>
+                </div>
                 <div className={Style.customTableCell}>Status</div>
               </div>
             </div>
@@ -265,24 +278,13 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
                   Mobile={Mobile}
                   Location={Location}
                   Email_ID={Email_ID}
+                  verbose={verbose}
                 />
               ))}
-              {/* <div className={Style.customTableRow}>
-                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
-                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
-                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}></div>
-                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}>Total</div>
-                <div className={Style.customTableCell} style={{border: 'none', backgroundColor: 'var(--white)'}}>
-                  {total.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
-
-
       </div>
-
     </Box>
   );
 
@@ -290,8 +292,11 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
     <div>
       {['bottom'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div onClick={toggleDrawer(anchor, true)}>
-            {name}
+          <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
+            <div className={Style.customTd} style={{minWidth:"10em"}}>{Mobile}</div>
+            <div className={Style.customTd} style={{minWidth:"20em"}}>{Email_ID}</div>
+            <div className={Style.customTd} style={{minWidth:"10em"}}>{Location}</div>
+            <div className={Style.customTd} style={{minWidth:"10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}

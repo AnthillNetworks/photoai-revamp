@@ -315,6 +315,19 @@
     text-align: center;
     font-size: 16px;
   }
+
+  .customTableCell1{
+    display: table-cell;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px; 
+  }
+
+  .customTableCell2{
+    display: table-cell;
+    text-align: center;
+    font-size: 16px; 
+  }
   
   .customTableHeader .customTableCell {
     font-weight: bold;
@@ -324,12 +337,12 @@
   .customTableBody .customTableCell {
     color: black; 
   }
-
+  
   .customTableBody .customTableRow:last-child .customTableCell {
     border: none;
     background-color: var(--white);
   }
- 
+
   .tableContainer {
     width: 100%;
     overflow-x: auto;

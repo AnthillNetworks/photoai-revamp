@@ -141,7 +141,7 @@ export default function HomePage({UserID}) {
                             <div className={Styles.calenderboxDate} style={item[1] == `${TodayDate}`?{color:"#fff"}:{}}>{item[1]}</div>
                             {AddInfom.map((it,ind)=>{
                                 if(it[0] == item[1]){
-                                    return <><div className={Styles.EventNameBox} style={ColorAndBGcolor(it[2])} key={ind}><AddPayment uuid={it[3]} name={it[4]}/></div></>
+                                    return <><div className={Styles.EventNameBox} style={ColorAndBGcolor(it[2])} key={ind}><AddPayment uuid={it[3]} name={it[4]} verbose={true}/></div></>
                                 }
                             })}
                         </div>

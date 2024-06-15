@@ -117,17 +117,20 @@ export default function EditLeftDrawer() {
                 <div className={Style.customThead}>
                   <div className={Style.customTr}>
                     <div className={Style.customTh}>#</div>
-                    <div className={Style.customTh}>Customer Name</div>
-                    <div className={Style.customTh}>Mobile</div>
-                    <div className={Style.customTh}>Mail</div>
-                    <div className={Style.customTh}>Location</div>
-                    <div className={Style.customTh}>Balance</div>
+                    <div>
+                      <div>
+                        <div className={Style.customTh} style={{minWidth:"10em"}}>Mobile</div>
+                        <div className={Style.customTh} style={{width:"20em"}} >Mail</div>
+                        <div className={Style.customTh} style={{minWidth:"10em"}}>Location</div>
+                        <div className={Style.customTh} style={{minWidth:"10em"}}>Balance</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className={Style.customTbody}>
                   {Data.map((item, index) => {
                     return (
-                      <div className={Style.customTr} key={index}>
+                      <div className={`${Style.customTr} flex`} key={index}>
                         <div className={Style.customTd}>
                           <img
                             style={{ width: '20px', cursor: 'pointer' }}
@@ -142,30 +145,15 @@ export default function EditLeftDrawer() {
                             alt=""
                           />
                         </div>
-                        <div className={Style.customTd} style={{ cursor: 'pointer' }}>
-                          <EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID}/>
-                        </div>
-                        <div className={Style.customTd}>{item.Mobile}</div>
-                        <div className={Style.customTd}>{item.Email_ID}</div>
-                        <div className={Style.customTd}>{item.Location}</div>
-                        <div className={Style.customTd}>{item.Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
-                        <div>
-                          <button className={Style.searchBtn} style={{padding:"4px 16px"}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
+                        <div className='flex gap-5'>
+                          <EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID} Balance={item.Balance} verbose={false}/>
+                          <div>
+                            <button className={Style.searchBtn} style={{padding:"4px 16px"}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
+                          </div>
                         </div>
                       </div>
                     );
                   })}
-                  <div className={Style.customTr}>
-                    <div className={Style.customTd} style={{ border: 'none' }}></div>
-                    <div className={Style.customTd} style={{ border: 'none' }}></div>
-                    <div className={Style.customTd} style={{ border: 'none' }}></div>
-                    <div className={Style.customTd} style={{ border: 'none' }}></div>
-                    <div className={Style.customTd} style={{ border: 'none' }}>Total</div>
-                    <div className={Style.customTd} style={{ border: 'none' }}>
-                      {tot.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
-                    </div>
-                    <div className={Style.customTd} style={{ border: 'none' }}></div>
-                  </div>
                 </div>
               </div>
             </div>
