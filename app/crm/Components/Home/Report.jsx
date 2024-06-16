@@ -118,59 +118,9 @@ export default function ReportLeftDrawer() {
   };
 
   const list = (anchor) => (
-    // <Box className={Style.DrawerCenterDivDiv} style={{backgroundColor:"#13192f"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-    //           <div style={{marginLeft:'10vw',marginTop:'4vw'}}>
-    //               <div style={{color:'white',display:'flex',alignItems:'center',cursor:'pointer'}} onClick={()=>{setState({ ...state, [anchor]: false })}}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_263_943)"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.94063 13.0599C7.65973 12.7787 7.50195 12.3974 7.50195 11.9999C7.50195 11.6024 7.65973 11.2212 7.94063 10.9399L13.5966 5.2819C13.878 5.00064 14.2596 4.84268 14.6575 4.84277C14.8545 4.84282 15.0495 4.88167 15.2315 4.9571C15.4135 5.03253 15.5789 5.14307 15.7181 5.2824C15.8574 5.42173 15.9679 5.58713 16.0432 5.76915C16.1186 5.95117 16.1573 6.14625 16.1573 6.34325C16.1572 6.54025 16.1184 6.73531 16.0429 6.9173C15.9675 7.09929 15.857 7.26463 15.7176 7.4039L11.1226 11.9999L15.7186 16.5959C15.862 16.7342 15.9763 16.8997 16.055 17.0826C16.1337 17.2656 16.1752 17.4624 16.177 17.6616C16.1788 17.8607 16.141 18.0583 16.0656 18.2427C15.9903 18.427 15.879 18.5946 15.7382 18.7355C15.5975 18.8764 15.43 18.9878 15.2457 19.0633C15.0614 19.1389 14.8639 19.1769 14.6647 19.1753C14.4656 19.1736 14.2687 19.1323 14.0857 19.0538C13.9026 18.9753 13.7371 18.8611 13.5986 18.7179L7.93863 13.0599H7.94063Z" fill="white"/></g><defs><clipPath id="clip0_263_943"><rect width="24" height="24" fill="white"/></clipPath></defs></svg>Back</div>
-    //           </div>
-    //           <div className={Style.ReportLeftDrawer}>
-    //             <div className={Style.Reports}>Reports</div>
-    //             <div className={Style.ReportsFilters}>
-    //               <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">Start Date</label><DatePickerIcon setValue={SetStartDate}/></div></div>
-    //               <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">End Date</label><DatePickerIcon setValue={SetEndDate}/></div></div>
-    //               <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">Customer Name</label><input className={Style.input} type="text" list='nameOptions' id="inputField" value={CusName} onChange={(e) =>{SetCusName(e.target.value);HandelSubmit(StartDate,EndDate,e.target.value)}}/><datalist id="nameOptions">
-    //                   <option value='Over All'/>
-    //                   {AllCustomerName.map((it)=>{
-    //                     return <option value={it}/>
-    //                   })}
-    //                 </datalist></div></div>
-    //             </div>
-    // 
-    //             <div>
-    //               <div className={Style.CustomerDiv}>
-    //                 <div className={Style.CustomerName}>{CusName == ''?'Over All':CusName}</div>
-    //                 <div className={Style.PieChartCssFlex}>
-    //                   <div className={Style.PieChartCss}><PieChart data={[{ title: 'Paid', value: Tot-Bal, color: '#13192f' },{ title: 'Balance', value: Bal, color: '#979ea7'},]}/></div>
-    //                   <div className={Style.PieChartCssPrice}>
-    //                     <div>
-    //                       <div>Total Amount</div>
-    //                       <div className={Style.ProgressFlex}>
-    //                         <div><BorderLinearProgress variant="determinate" value={100} /></div>
-    //                         <div>{Tot.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</div>
-    //                       </div>
-    //                     </div>
-    //                     <div>
-    //                       <div>Paid</div>
-    //                       <div className={Style.ProgressFlex}>
-    //                         <div><BorderPaidLinearProgress variant="determinate" value={(((Tot-Bal)/Tot)*100)} /></div>
-    //                         <div>{(Tot-Bal).toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</div>
-    //                       </div>
-    //                     </div>
-    //                     <div>
-    //                       <div>Balance</div>
-    //                       <div className={Style.ProgressFlex}>
-    //                         <div><BorderBalenceLinearProgress variant="determinate" value={((Bal/Tot)*100)} /></div>
-    //                         <div>{Bal.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</div>
-    //                       </div>
-    //                     </div>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    // </Box>
 
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-        <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'70%',margin:"auto"}}>
+        <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{width:'70%',margin:"auto"}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>
@@ -234,18 +184,16 @@ export default function ReportLeftDrawer() {
 
             {/* Charts */}
             <div className='bg -white w-full mt-6 mb-4'>
-              <div className='flex items-start pl-8' style={{position:"relative"}}>
+              <div className='flex items-start pl-8' style={{position:"relative",width:"32em"}}>
                 <ExamplePieChart Bal={Bal} Tot={Tot} />
                 {/* Legends */}
-                <div style={{position:"absolute",top:"45%",right:"40%"}}>
+                <div style={{position:"absolute",top:"55%",right:"10%"}}>
                   <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--red)"}}></div><div style={{fontSize:"14px"}}>Total Revenue</div></div>
                   <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--paid)"}}></div><div style={{fontSize:"14px"}}>Paid Amount</div></div>
                   <div className='flex gap-1 items-center'><div style={{width:"9px",height:"9px",borderRadius:"2px",backgroundColor:"var(--bal)"}}></div><div style={{fontSize:"14px"}}>Balance Amount</div></div>
                 </div>
               </div>
             </div>
-
-            
         </div>
     </Box>
   );

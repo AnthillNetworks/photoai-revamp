@@ -54,7 +54,8 @@ export default function EditLeftDrawer() {
 
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-        <div className='w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'70%',margin:"auto"}}>
+        <div className='w-10/12 m-auto flex flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto"}}>
+
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2'>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>
@@ -80,41 +81,8 @@ export default function EditLeftDrawer() {
                 </div>  
             </div>
 
-            {/* <div className={Style.TableTag} style={{maxHeight:"60vh",overflow:"scroll"}}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Customer Name</th>
-                      <th>Mobile</th>
-                      <th>Mail</th>
-                      <th>Location</th>
-                      <th>Balance</th>
-                    </tr>
-                  </thead>
-                  <tbody >
-                      {Data.map((item,index)=>{
-                        return  <tr key={index}>
-                        <td style={{cursor:'pointer'}}><EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile}/></td>
-                        <td>{item.Mobile}</td>
-                        <td>{item.Email_ID}</td>
-                        <td>{item.Location}</td>
-                        <td>{item.Balance.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-                        <td style={{border:'none',backgroundColor:'#13192f'}}><img style={{width:'20px',cursor:'pointer'}} onClick={()=>{if(ConstCheckedData){SetConstCheckedData(null)}else{SetConstCheckedData(item)}}} src={ConstCheckedData?.Customer_ID != item.Customer_ID?'/svg/CheckedFalse.svg':'/svg/CheckedTrue.svg'} alt="" /></td>
-                      </tr>
-                      })}
-                    <tr>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}></td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}>Total</td>
-                      <td style={{border:'none',backgroundColor:'#13192f'}}>{tot.toLocaleString('en-IN', {style: 'currency',currency: 'INR'})}</td>
-                    </tr>
-                  </tbody>
-                </table>
-            </div> */}
-
             <div className={Style.TableTag} style={{ maxHeight: "60vh", overflow: "scroll" }}>
-              <div className={Style.customTable}>
+              <div className={Style.customTable} style={{width:"fit-content",backgroundColor:"var(--white)",padding:"1em 2em",borderRadius:"10px"}}>
                 <div className={Style.customThead}>
                   <div className={Style.customTr}>
                     <div className={Style.customTh}>#</div>

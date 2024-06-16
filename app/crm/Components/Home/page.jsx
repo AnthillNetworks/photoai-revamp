@@ -99,7 +99,6 @@ export default function HomePage({UserID}) {
             </div>
             <div className={Styles.MainContent} style={{display:"flex",flexDirection:"column",width:'100%'}}>
                 <div className={Styles.NavSearchModel} style={{backgroundColor:"var(--bg)",display:"flex"}}>
-                    {/* <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div> */}
                     <div className={Styles.SearchModel}>
                             <div onClick={handlePreviousMonth}><ArrowLeftIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
                             <select

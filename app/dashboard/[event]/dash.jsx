@@ -180,7 +180,7 @@ export default function Dashboard({ event}){
           }
       } while (continuationToken);
       SetAllFolders(folders)
-  };
+    };
     useEffect(()=>{
       FetchDashboard(null);
       GetAllFavourite();
@@ -387,7 +387,7 @@ export default function Dashboard({ event}){
             setVideos(videoKeys);
         } catch (error) {
             console.error('Error listing Videos:', error);
-            throw error;
+            loadderevalue(false);      
         }
       loadderevalue(false);
     }
@@ -404,15 +404,12 @@ export default function Dashboard({ event}){
                     <div onClick={OnExploreClickFun} style={pagetext === 'Explore'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Explore'?'/assets/explore.svg':'/assets/inexplore.svg'}/><div>Explore</div></div>
                     <div onClick={OnFavouriteClickFun} style={pagetext === 'Favorites'?{color:'#fff',backgroundColor:"var(--blue)"}:{color:'#000'}}><img style={{width:"15px",height:"15px"}} src={pagetext === 'Favorites'?'/assets/fav.svg':'/assets/infav.svg'}/><div>Favorites</div></div>
                 </div>
-                {/* <button className={Styles.DashboardMenuBtn} onClick={()=>{if(dropdown){dropdownvalue(false)}else{dropdownvalue(true)}}}>Attendees</button> */}
             </div>
             <div>
                 <div className={Styles.MakeNavFixed}>
                     <div className={Styles.NavOneForMenu} style={{borderBottom:"1px solid var(--blue)"}}>
                         <div style={{color:"var(--blue)"}}>{pagetext === 'All Photos' ? 'Event Photos' : pagetext === 'All Videos' ? 'Event Videos' : pagetext === 'Explore' ? "Find your moments with fav people" : pagetext === 'Favorites' ? 'Your Favorites' : '' }</div>
                         <div>
-                            {/* <div><img src="/svg/menu.svg"/></div>
-                            <div><img className={Styles.UserIcon} src="https://mui.com/static/images/avatar/1.jpg"/></div> */}
                             <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Styles.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
                         </div>
                     </div>
@@ -424,7 +421,7 @@ export default function Dashboard({ event}){
                       </>:<></>}
                     </div>
                     <div className={Styles.NavOneForSearch}>
-                        <div style={{marginBottom:"1em",width:"70%"}}>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>:<></>}</>}</div>
+                        <div style={{marginBottom:"1em",width:"90%"}}>{pagetext === 'Explore'?<SearchModel constData={ExploreSlfies} SetConstData={SetConstData}/>:<>{pagetext == 'Favorites'?<Link href={`/dashboard/${event}/favorites/download`} className={Styles.NavBtn} style={{backgroundColor:"var(--pink)"}}>Download</Link>:<></>}</>}</div>
                     </div>
                 </div>
                 <div>
@@ -467,34 +464,33 @@ export default function Dashboard({ event}){
                 )) }
               </div>
             ) : (
-              <div className={Styles.empty}>No Videos Found !</div>
+              <div className={`${Styles.empty}`} style={{color:"var(--blue)"}}>No Videos Found !</div>
             )}
           </div>  
         </>
       }
-              </div>
-          </div>
+      </div>
         </div>
-        {Slider?<div className={Styles.OverflowScrollAnimation} ref={sliderRef}>
-        {DobeMaped.map((item,index)=>{
-          return <div key={index} className={Styles.FullscreenImage}>
-            <span onClick={()=>{SliderValue(false)}}>&#x2716;</span>
-            <span className={Styles.FullscrennnnImage}>
-              <div><img src={AllSupaFavourite.includes(item)?'/svg/FavTrue.svg':'/svg/FavSelected.svg'} onClick={async()=>{if(AllSupaFavourite.includes(item)){const newArray = AllSupaFavourite.filter((element) => `${element}` !== item);const respos = await UpdateSupaData(newArray);AllSupaFavouritevalue(respos)}else{const respos = await UpdateSupaData([...AllSupaFavourite,`${item}`]);AllSupaFavouritevalue(respos)}}} className={Styles.CheckBox}/></div>
+        </div>
+          {Slider?<div className={Styles.OverflowScrollAnimation} ref={sliderRef}>
+          {DobeMaped.map((item,index)=>{
+            return <div key={index} className={Styles.FullscreenImage}>
+              <span onClick={()=>{SliderValue(false)}}>&#x2716;</span>
+              <span className={Styles.FullscrennnnImage}>
+                <div><img src={AllSupaFavourite.includes(item)?'/svg/FavTrue.svg':'/svg/FavSelected.svg'} onClick={async()=>{if(AllSupaFavourite.includes(item)){const newArray = AllSupaFavourite.filter((element) => `${element}` !== item);const respos = await UpdateSupaData(newArray);AllSupaFavouritevalue(respos)}else{const respos = await UpdateSupaData([...AllSupaFavourite,`${item}`]);AllSupaFavouritevalue(respos)}}} className={Styles.CheckBox}/></div>
+                <div>
+                  {SuperValue && pagetext === 'Explore'&& ExploreSlfieData.length!=0?<div style={{marginBottom:'10px'}}>
+                    <input type="file" name="Image_Files" multiple onChange={(e)=>{uploadvalue(e.target.files)}}/>
+                    <ConfirmDelete DeleteFunction={DeleteFunction} item={item} />
+                  </div>:<></>}
+                  <a className={Styles.DownloadBtnOnSlider} href={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item}`} target="_blank" download>Download</a>
+                </div>
+              </span>
               <div>
-                {SuperValue && pagetext === 'Explore'&& ExploreSlfieData.length!=0?<div style={{marginBottom:'10px'}}>
-                  {/* <button style={{padding:'10px 30px',paddingLeft:'20px',borderRadius:'5px',border:'none',marginLeft:'10px',cursor:'pointer'}}>Upload</button> */}
-                  <input type="file" name="Image_Files" multiple onChange={(e)=>{uploadvalue(e.target.files)}}/>
-                  <ConfirmDelete DeleteFunction={DeleteFunction} item={item} />
-                </div>:<></>}
-                <a className={Styles.DownloadBtnOnSlider} href={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item}`} target="_blank" download>Download</a>
+                <img src={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item.split('photographers_images')[0]}COMPRESS_IMAGES${item.split('photographers_images')[1]}`} alt="Fullscreen Image" className={Styles.FullscrenImage}/>
               </div>
-            </span>
-            <div>
-              <img src={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item.split('photographers_images')[0]}COMPRESS_IMAGES${item.split('photographers_images')[1]}`} alt="Fullscreen Image" className={Styles.FullscrenImage}/>
             </div>
-          </div>
-        })}
+          })}
         </div>:<></>}
         {window.innerWidth <= 800?<>
           <Box sx={{ width: 500 }}>

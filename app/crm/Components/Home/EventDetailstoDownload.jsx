@@ -32,19 +32,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
     Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
     verbose={verbose}
     />
-
   </div>
-
-  {/* <div className={Style.customTableCell}>{item.EventDate}</div>
-  <div className={Style.customTableCell}>
-    {item.Full_Amount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-  </div>
-  <div className={Style.customTableCell}>
-    {AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-  </div>
-  <div className={Style.customTableCell}>
-    {(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
-  </div> */}
 
   <div className={Style.customTableCell}>
     <select
@@ -65,7 +53,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
       <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
     </select>
   </div>
-  <div className={Style.customTableCell} style={{border: 'none', backgroundColor:"var(--bg)"}}>
+  <div className={Style.customTableCell} style={{border: 'none', backgroundColor:"var(--white)"}}>
     <img
       className={Style.customImage}
       style={{width: '20px', cursor: 'pointer'}}
@@ -192,7 +180,7 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen overflow-scroll`} style={{backgroundColor:"var(--bg)",overflow:"scroll !important"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
  
-      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll !important"}}>
+      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll !important"}}>
         
         {/* Header */}
         <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
@@ -252,11 +240,11 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         </div>
 
         {/* Table */}
-        <div className={Style.customTableContainer} style={{width:"100%",overflow:"scroll"}}>
+        <div className={Style.customTableContainer} style={{width:"90%",overflow:"scroll",backgroundColor:"white",borderRadius:"10px"}}>
           <div className={Style.customTable}>
             <div className={Style.customTableHeader}>
               <div className={Style.customTableRow}>
-                <div style={{borderBottom:"1px solid var(--blue)",padding:"10px 20px",fontWeight:"bold"}}>
+                <div style={{borderBottom:"1px solid var(--blue)",padding:"0px 20px",fontWeight:"bold"}}>
                   <div className={Style.customTableCell1} style={{width:"10em"}}>Event Name</div>
                   <div className={Style.customTableCell1} style={{width:"10em"}}>Date</div>
                   <div className={Style.customTableCell1} style={{width:"10em"}}>Full Amount</div>

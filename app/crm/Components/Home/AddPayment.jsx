@@ -60,16 +60,14 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
     DataValue(Array);
   }
   const HandelSendSMSBTN = async()=>{
-    // sendsmscrmofcustomersetelement(`${cusname} (${name.split('-')[1].split('_').join(' ')})`,total,Mobile);
     sendsmscrmofcustomersetelement(`${cusname}`,total,Mobile,`${name.split('-')[1].split('_').join(' ')}`,totalAmount);
     alert('Message Sent ...')
   }
 
-
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
             
-      <div className='w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto"}}>
+      <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto"}}>
         
         {/* Header */}
         <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
@@ -106,9 +104,9 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
             <div><AddPaymentModes uuid={uuid} name={name} GetAllAmount={GetAllAmount}/></div>
           </div>
         </div>
-
+        
         {/* Table */}
-        <div className={Style.tableContainer}>
+        <div className={Style.tableContainer} style={{width:"90%",backgroundColor:"white",borderRadius:"10px"}}>
           <div className={`${Style.table} bg-white`}>
             <div className={Style.tableHeader}>
               <div className={Style.tableRow}>

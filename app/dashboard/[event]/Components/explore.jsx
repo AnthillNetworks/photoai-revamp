@@ -10,7 +10,7 @@ export default function ExploreComp({Data,EpxFun}){
                     <div onClick={()=>{EpxFun(item.split("/")[2])}} className={Style.SlidreImage}>
                       <Image src={`https://selife-bucket.s3.ap-south-1.amazonaws.com/${item}`} width={50} height={50} alt=''/>
                     </div>
-                    <div>{item.split("/")[2]}</div>
+                    <div style={{color:"var(--black)"}}>{item.split("/")[2]}</div>
                 </div>
             })}
           </span>

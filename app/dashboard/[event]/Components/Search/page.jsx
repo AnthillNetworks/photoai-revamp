@@ -16,7 +16,6 @@ export default function SearchModel({ constData, SetConstData }) {
     <>
       <div className={Styles.SearchModel}>
         <input type="text" placeholder="Search" value={searchQuery} onChange={handleSearch} />
-        {/* <img src="/svg/search.svg" alt="search" /> */}
         <div className={Styles.searchBtn}>Search</div>
       </div>
     </>

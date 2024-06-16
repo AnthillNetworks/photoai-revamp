@@ -52,8 +52,8 @@ export default function GreatingsLeftDrawer() {
 
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-              
-        <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll"}}>
+ 
+        <div className='w-10/12 m-auto flex flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto",overflow:"scroll"}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>

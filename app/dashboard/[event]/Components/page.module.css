@@ -3,7 +3,7 @@
     background-color: var(--bg);
 }
 .Dashboard > div:nth-child(1){
-    width: 25vw;
+    width: 18vw;
     height: 100vh;
     position: fixed;
     border-top-right-radius: 5px;
@@ -12,16 +12,16 @@
     border: 0 10px 10px 0;
 }
 .Dashboard > div:nth-child(2){
-    width: 71vw;
-    margin: 0 2vw 0 27vw;
+    width: 80vw;
+    margin: 0 2vw 0 20vw;
 }
 .MainContaine{
       padding-top: 14vw;
 }
 .MainContainer{
     display: flex;
-    width: 71vw;
-    /* padding-top: 13vw; */
+    width: 80vw;
+    padding: 0 2em;
     margin: auto;
     background-color: var(--bg);
   }
@@ -36,7 +36,7 @@
     border: none;
     border-radius: 5px;
     color: black;
-    padding: .4em 1em;
+    padding: .4em 1em .4em 0em;
     color: white;
     outline: none;
   }
@@ -55,14 +55,15 @@
     position: fixed;
     background-color: var(--bg);
     z-index: 1000;
-    width: 71vw;
+    width: 80vw;
+    padding: 0 2em;
   }
   .SearchModel > input{
     background-color: var(--white);
     border: none;
-    border-radius: 25px;
+    border-radius: 10px;
     width: 100%;
-    padding: 1vw;
+    padding: .5em;
     color: black;
     outline: none;
   }
@@ -132,6 +133,7 @@
     overflow: scroll;
     margin-top: 5px;
     margin-bottom: 20px;
+    padding: 0 2em;
   }
   .ExploreSlider > div{
     margin-right: 10px;
@@ -259,6 +261,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+  padding: 2em;
 }
 
 .empty{
