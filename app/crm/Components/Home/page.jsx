@@ -83,10 +83,14 @@ export default function HomePage({UserID}) {
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'30svh',justifyContent:'space-around'}}>
                     <EditLeftDrawer/>
                     <Link href="/">
-                        {/* <Image width={100} height={100} src='/svg/AICrm.svg' alt="search" style={{width: '60px',height:'auto'}}/> */}
-                        <div className='flex gap-2' style={{cursor:"pointer"}}>
-                            <img src="/assets/album.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
-                            <div>Ai Album</div>
+                        <div className={`flex gap-2`} style={{cursor:"pointer"}}>
+                            <div
+                                className={`flex gap-4 items-center w-full ${Styles.NavOptions}`} 
+                                style={{ cursor: "pointer" }}
+                            >
+                                <div className={Styles.CustomerIcon}></div>
+                                <div>Ai Album</div>
+                            </div>
                         </div>
                     </Link>
                     <GreatingsLeftDrawer/>
@@ -132,7 +136,7 @@ export default function HomePage({UserID}) {
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#EBBA54",color:"#000"}}></div>Balance settled</div>
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#F06976",color:"#000"}}></div>Delivered</div>
                 </div>
-                <div className={Styles.MainContentCalender}>
+                <div className={Styles.MainContentCalender} style={{width:"80%",margin:"2em 0 0 4em"}}>
                     {NotToShow.map((item,index)=>{
                         return <div className={Styles.calenderboxNone} key={index}></div>
                     })}

@@ -254,11 +254,15 @@ export default function ReportLeftDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-        {/* <div><Image onClick={toggleDrawer(anchor, true)} src='/svg/report.svg' alt="search" width={100} height={100} style={{width: '60px',height:'auto',cursor:'pointer'}}/></div> */}
-        <div onClick={toggleDrawer(anchor, true)} className='flex gap-2' style={{cursor:"pointer"}}>
-              <img src="/assets/ininsights.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
-              <div>Insights</div>
+        <div 
+            onClick={toggleDrawer(anchor, true)} 
+            className={`flex gap-4 items-center ${Style.NavOptions2}`} 
+            style={{ cursor: "pointer" }}
+          >
+            <div className={Style.CustomerIcon2}></div>
+            <div>Insights</div>
         </div>
+
         <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
           {list(anchor)}
         </Drawer>

@@ -132,6 +132,32 @@
     line-height: 0 !important;
     padding-top: 5px;
 }
+
+.NavOptions {
+  padding: 4px 3em 4px 1em;
+}
+
+.NavOptions:hover{
+  background-color: #177BE5;
+  border-radius: 5px;
+  color: white;
+  transition: .3s ease-in-out;
+}
+
+.CustomerIcon {
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/album.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.NavOptions:hover > .CustomerIcon {
+  background-image: url('/assets/inalbum.svg');
+  transition: .3s ease-in-out;
+}
+
+
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .MainContent{
       justify-content: flex-start;

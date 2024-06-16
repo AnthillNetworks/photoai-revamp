@@ -51,6 +51,7 @@ export default function EditLeftDrawer() {
   React.useEffect(()=>{
     FetchCustomerData();
   },[]);
+
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
         <div className='w-10/12 m-auto flex items-center justify-center flex-col pt-4 gap-4' style={{width:'70%',margin:"auto"}}>
@@ -183,15 +184,17 @@ export default function EditLeftDrawer() {
   );
 
   return (
+
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <div>
-            {/* <img onClick={toggleDrawer(anchor, true)} src='/svg/EditCrm.svg' alt="search" style={{width: '60px',height:'auto',cursor:'pointer'}}/> */}
-            <div onClick={toggleDrawer(anchor, true)} className='flex gap-2' style={{cursor:"pointer"}}>
-              <img src="/assets/customer.svg" alt="Customer" style={{width: '20px',height:'20',objectFit:"contain",cursor:'pointer'}}/>
-              <div>Customers</div>
-            </div>
+          <div 
+            onClick={toggleDrawer(anchor, true)} 
+            className={`flex gap-4 items-center ${Style.NavOptions}`} 
+            style={{ cursor: "pointer" }}
+          >
+            <div className={Style.CustomerIcon}></div>
+            <div>Customers</div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}

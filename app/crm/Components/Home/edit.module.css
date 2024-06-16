@@ -396,6 +396,49 @@
     border: none !important;
   }
 
+  .NavOptions,.NavOptions1,.NavOptions2 {
+    padding: 4px 3em 4px 1em;
+  }
+
+  .NavOptions:hover,.NavOptions1:hover,.NavOptions2:hover{
+    background-color: #177BE5;
+    border-radius: 5px;
+    color: white;
+    transition: .3s ease-in-out;
+  }
+
+  .CustomerIcon,.CustomerIcon1,.CustomerIcon2 {
+    width: 20px;
+    height: 20px;
+    background-image: url('/assets/incustomer.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .CustomerIcon1{
+    background-image: url('/assets/ingreet.svg');
+  }
+
+  .CustomerIcon2{
+    background-image: url('/assets/ininsights.svg');
+  }
+  
+  .NavOptions:hover > .CustomerIcon {
+    background-image: url('/assets/customer.svg');
+    transition: .3s ease-in-out;
+  }
+
+  .NavOptions1:hover > .CustomerIcon1 {
+    background-image: url('/assets/greet.svg');
+    transition: .3s ease-in-out;
+  }
+
+  .NavOptions2:hover > .CustomerIcon2 {
+    background-image: url('/assets/insights.svg');
+    transition: .3s ease-in-out;
+  }
+
+
   @media (max-width: 768px) {
     .customTableCell {
       display: block;
@@ -408,8 +451,6 @@
     }
   }
   
-  
-
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .TableTag{
       overflow: auto;
