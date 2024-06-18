@@ -438,6 +438,18 @@
     transition: .3s ease-in-out;
   }
 
+  .dropdown{
+    margin: .4em 0 0 0;
+    position: absolute;
+    top: 100%;
+    left: 36px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    align-items: start;
+  }
 
   @media (max-width: 768px) {
     .customTableCell {
