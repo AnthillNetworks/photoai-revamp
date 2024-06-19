@@ -139,8 +139,8 @@ export default function HomePage({UserID}) {
                     {NotToShow.map((item,index)=>{
                         return <div className={Styles.calenderboxNone} key={index}></div>
                     })}
-                    {Array.map((item)=>{
-                        return <div className={`${Styles.calenderbox} ${Styles.boxes}`} style={item[1] == `${TodayDate}`?{backgroundColor:"var(--darkblue)"}:{}}>
+                    {Array.map((item,index)=>{
+                        return <div key={index} className={`${Styles.calenderbox} ${Styles.boxes}`} style={item[1] == `${TodayDate}`?{backgroundColor:"var(--darkblue)"}:{}}>
                             <div className={Styles.calenderboxDate} style={item[1] == `${TodayDate}`?{color:"#fff"}:{}}>{item[1]}</div>
                             {AddInfom.map((it,ind)=>{
                                 if(it[0] == item[1]){
@@ -155,7 +155,7 @@ export default function HomePage({UserID}) {
     </>
   )
 }
-    
+
 export function ColorAndBGcolor(status){
     if(status==''|| !status){
         return {

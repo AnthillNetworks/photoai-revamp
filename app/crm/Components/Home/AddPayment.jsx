@@ -179,9 +179,7 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
             </div>
         </div>
         </div>
-
       </div>
-
     </Box>
   );
 
@@ -191,19 +189,27 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)} style={{cursor:'pointer'}}>
 
-            <div className={verbose ? Style.customTableCell2 : Style.customTableCell1 } style={{minWidth:"10em"}}>
-              {name.split('-')[1].split('_').join(' ')}
-            </div>
-            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>{EventDate}</div>
-            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-              {Full_Amount}
-            </div>
-            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-              {AdvanceAmount}
-            </div>
-            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
-              {Bal}
-            </div>
+            {
+              !verbose ? 
+                <>
+                  <div className={verbose ? Style.customTableCell2 : Style.customTableCell1 } style={{minWidth:"10em"}}>
+                    {name.split('-')[1].split('_').join(' ')}
+                  </div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>{EventDate}</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
+                    {Full_Amount}
+                  </div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
+                    {AdvanceAmount}
+                  </div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
+                    {Bal}
+                  </div>
+                </> :
+                <>
+                  {name.split('-')[1].split('_').join(' ')}
+                </>
+            }
 
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>

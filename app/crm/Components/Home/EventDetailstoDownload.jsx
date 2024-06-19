@@ -337,9 +337,9 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
           <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
             <div className={Style.customTd} style={{minWidth:"10em"}}>{name}</div>
             <div className={Style.customTd} style={{minWidth:"8em"}}>{Mobile}</div>
-            <div className={Style.customTd} style={{minWidth:"16em"}}>{Email_ID}</div>
+            <div className={Style.customTd} style={{minWidth:"18em"}}>{Email_ID}</div>
             <div className={Style.customTd} style={{minWidth:"8em"}}>{Location}</div>
-            <div className={Style.customTd} style={{minWidth:"8em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
+            <div className={Style.customTd} style={{minWidth:"10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}

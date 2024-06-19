@@ -118,7 +118,7 @@ export default function GreatingsLeftDrawer() {
             <div className={Style.allGreet}>
               {Data.map((item,index)=>{
 
-                return <div className='w-full flex items-center justify-between'>
+                return <div className='w-full flex items-center justify-between' key={index}>
                   <div className='flex gap-10'>
                     <div><img src={`${item.Photo}`} alt="" className={Style.greetImg} /></div>
                     <div className='flex flex-col gap-2'>

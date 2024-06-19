@@ -151,8 +151,8 @@ export default function ReportLeftDrawer() {
                   <input type="text" list='nameOptions' id="inputField" className={Style.inputCon} value={CusName} onChange={(e) =>{SetCusName(e.target.value);HandelSubmit(StartDate,EndDate,e.target.value)}}/>
                   <datalist id="nameOptions" className={Style.datalistCon}>
                     <option value='Over All'/>
-                    {AllCustomerName.map((it)=>{  
-                      return <option value={it}/>
+                    {AllCustomerName.map((it,index)=>{  
+                      return <option value={it} key={index}/>
                     })}
                   </datalist>
               </div>
