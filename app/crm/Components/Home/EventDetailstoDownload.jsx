@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Style from "./edit.module.css"
-import downloadCSV,{searchFun} from './DownloadCSV';
+import downloadCSV,{downloadEXCEL,downloadPDF,searchFun} from './DownloadCSV';
 import CreateEvent from './CreateEvent';
 import { DatePickerIcon } from './page';
 import Confirm from './confirm';
@@ -177,9 +177,41 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
       alert('Message Send ...');
     }
   }
+
+  const [dropdownVisible, setDropdownVisible] = React.useState(false);
+  const handleDownload = (format) => {
+      const Array = [];
+      for(let a = 0;a<Data.length;a++) {
+        let AdvanceAmount = 0;
+        Data[a].Advance_Payment.map((it)=>{
+          AdvanceAmount += +it.Advance;
+        })
+        Array.push({"Event_Name":Data[a].EventName,"EventDate":Data[a].EventDate,"Full_Amount":Data[a].Full_Amount,"Paid_Amount":AdvanceAmount,"Balance":(+Data[a].Full_Amount - AdvanceAmount),"Status":Data[a].Status});
+      }
+      switch (format) {
+          case 'csv':
+              downloadCSV(Array);
+              break;
+          case 'excel':
+              downloadEXCEL(Array);
+              break;
+          case 'pdf':
+              downloadPDF(Array);
+              break;
+          default:
+              break;
+      }
+      setDropdownVisible(false);
+  };
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen overflow-scroll`} style={{backgroundColor:"var(--bg)",overflow:"scroll !important"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
- 
+      <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+      </div>
       <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll !important"}}>
         
         {/* Header */}
@@ -220,7 +252,29 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         <div className='pl-8 my-4 flex items-center justify-between w-full'>
           <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
           <div className='flex gap-6'>
-            <div onClick={()=>{downloadCSVFunction()}} style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div>
+            {/* <div onClick={()=>{downloadCSVFunction()}} style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div> */}
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <button 
+                  className={Style.searchBtn} 
+                  style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
+                  onClick={() => setDropdownVisible(!dropdownVisible)} 
+              >
+                  Download as <img src="/assets/downarr.svg" alt="Down Arrow" />
+              </button>
+              {dropdownVisible && (
+                  <div className={`${Style.dropdown} flex flex-col py-2`} style={{ position: 'absolute', top: '100%', left: "85px", zIndex: 1 }}>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('csv')}>CSV</button>
+                      </div>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('excel')}>EXCEL</button>
+                      </div>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}} >
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('pdf')}>PDF</button>
+                      </div>
+                  </div>
+              )}
+            </div>
             <div><CreateEvent id={id} FetchEventsByUUID={FetchEventsByUUID}/></div>
           </div>
         </div>

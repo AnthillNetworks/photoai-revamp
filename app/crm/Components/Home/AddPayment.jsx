@@ -6,7 +6,7 @@ import Style from "./edit.module.css"
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddPaymentModes from './AddPaymentModes';
 import { GetEventsAmountByUUID,GetEventsTotalAmountByUUID,UpdateEventsAmountByUUID } from './AllFunctions';
-import downloadCSV from './DownloadCSV';
+import downloadCSV,{downloadEXCEL,downloadPDF,searchFun} from './DownloadCSV';
 import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import PaymentUpdateSendBtn from './PaymentUpdateSendBtn';
 import Image from 'next/image';
@@ -63,10 +63,32 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
     sendsmscrmofcustomersetelement(`${cusname}`,total,Mobile,`${name.split('-')[1].split('_').join(' ')}`,totalAmount);
     alert('Message Sent ...')
   }
+  const [dropdownVisible, setDropdownVisible] = React.useState(false);
+  const handleDownload = (format) => {
+      switch (format) {
+          case 'csv':
+              downloadCSV(Data);
+              break;
+          case 'excel':
+              downloadEXCEL(Data);
+              break;
+          case 'pdf':
+              downloadPDF(Data);
+              break;
+          default:
+              break;
+      }
+      setDropdownVisible(false);
+  };
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
-            
+      <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+      </div>    
       <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto"}}>
         
         {/* Header */}
@@ -100,7 +122,29 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
         <div className='pl-8 my-4 flex items-center justify-between w-full'>
           <div style={{color:"var(--blue)",fontSize:"24px"}}>{name.split("-")[1]} Event</div>
           <div className='flex gap-6'>
-            <div onClick={()=>{downloadCSV(Data)}} className='flex items-center' style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div>
+            {/* <div onClick={()=>{downloadCSV(Data)}} className='flex items-center' style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div> */}
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <button 
+                  className={Style.searchBtn} 
+                  style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
+                  onClick={() => setDropdownVisible(!dropdownVisible)} 
+              >
+                  Download as <img src="/assets/downarr.svg" alt="Down Arrow" />
+              </button>
+              {dropdownVisible && (
+                  <div className={`${Style.dropdown} flex flex-col py-2`} style={{ position: 'absolute', top: '100%', left: "85px", zIndex: 1 }}>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('csv')}>CSV</button>
+                      </div>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('excel')}>EXCEL</button>
+                      </div>
+                      <div style={{borderBottom:"1px solid black",width:"4em"}} >
+                        <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('pdf')}>PDF</button>
+                      </div>
+                  </div>
+              )}
+            </div>
             <div><AddPaymentModes uuid={uuid} name={name} GetAllAmount={GetAllAmount}/></div>
           </div>
         </div>

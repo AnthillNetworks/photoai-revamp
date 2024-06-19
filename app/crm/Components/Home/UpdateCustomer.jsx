@@ -36,6 +36,10 @@ export default function UpdateCustomer({FetchCustomerData,Data}) {
         alert("Something went wrong")
     }}
   }
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+  
   const list = (anchor) => (
 
     // <Box className={Style.DrawerCenter} style={{backgroundColor:"#13192f"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
@@ -57,6 +61,9 @@ export default function UpdateCustomer({FetchCustomerData,Data}) {
     // </Box>
 
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)",height:"100vh"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+      <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+      </div>
       <div style={{width:'100vw',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:"100vh"}}>
           <div style={{position:"relative",boxShadow:"0px 72px 80px -48px rgba(0, 0, 0, 0.5)",backgroundColor:'var(--white)',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',width:"50em",padding:"3em 5em",borderRadius:"20px"}}>
               <form onSubmit={HandelSubmit} style={{maxWidth:'500px',width:'100%',display:'flex',flexDirection:'column',gap:".5em"}}>

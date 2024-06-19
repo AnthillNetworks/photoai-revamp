@@ -157,6 +157,12 @@
   transition: .3s ease-in-out;
 }
 
+.homeIcon{
+  position: absolute;
+  top: 6.6%;
+  left: 5%;
+  cursor: pointer;
+}
 
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .MainContent{

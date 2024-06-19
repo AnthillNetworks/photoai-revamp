@@ -10,6 +10,7 @@ import { DeleteCustomerFuntion, GetCustomerFuntion } from './AllFunctions';
 import Confirm from './confirm';
 import UpdateCustomer from './UpdateCustomer';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function EditLeftDrawer() {
   const [Data,SetData] = React.useState([]);
   const [ConstData,SetConstData] = React.useState([]);
@@ -70,8 +71,15 @@ export default function EditLeftDrawer() {
       setDropdownVisible(false);
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+        <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+        </div>
         <div className='w-10/12 m-auto flex flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto"}}>
 
             {/* Header */}
@@ -94,27 +102,27 @@ export default function EditLeftDrawer() {
                 </div>
                 <div className={Style.AddModelButton}>
                   <div style={{ position: 'relative', display: 'inline-block' }}>
-            <button 
-                className={Style.searchBtn} 
-                style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
-                onClick={() => setDropdownVisible(!dropdownVisible)} 
-            >
-                Download as <img src="/assets/downarr.svg" alt="Down Arrow" />
-            </button>
-            {dropdownVisible && (
-                <div className={`${Style.dropdown} flex flex-col py-2`} style={{ position: 'absolute', top: '100%', left: "80px", zIndex: 1 }}>
-                    <div style={{borderBottom:"1px solid black",width:"4em"}}>
-                      <button style={{padding:"0em .7em"}} onClick={() => handleDownload('csv')}>CSV</button>
-                    </div>
-                    <div style={{borderBottom:"1px solid black",width:"4em"}}>
-                      <button style={{padding:"0em .7em"}} onClick={() => handleDownload('excel')}>EXCEL</button>
-                    </div>
-                    <div style={{borderBottom:"1px solid black",width:"4em"}} >
-                      <button style={{padding:"0em .7em"}} onClick={() => handleDownload('pdf')}>PDF</button>
-                    </div>
-                </div>
-            )}
-        </div>
+                    <button 
+                        className={Style.searchBtn} 
+                        style={{ display:"flex", gap:"1em",alignItems:"center",justifyContent:"space-between",border: "1px solid var(--pink)", color: "var(--pink)", backgroundColor: "var(--bg)" }}
+                        onClick={() => setDropdownVisible(!dropdownVisible)} 
+                    >
+                        Download as <img src="/assets/downarr.svg" alt="Down Arrow" />
+                    </button>
+                    {dropdownVisible && (
+                        <div className={`${Style.dropdown} flex flex-col py-2`} style={{ position: 'absolute', top: '100%', left: "85px", zIndex: 1 }}>
+                            <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                              <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('csv')}>CSV</button>
+                            </div>
+                            <div style={{borderBottom:"1px solid black",width:"4em"}}>
+                              <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('excel')}>EXCEL</button>
+                            </div>
+                            <div style={{borderBottom:"1px solid black",width:"4em"}} >
+                              <button style={{padding:"0em .7em",fontSize:"14px"}} onClick={() => handleDownload('pdf')}>PDF</button>
+                            </div>
+                        </div>
+                    )}
+                  </div>
                   <EditCreate FetchCustomerData={FetchCustomerData}/>
                 </div>  
             </div>

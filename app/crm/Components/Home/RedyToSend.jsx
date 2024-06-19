@@ -67,11 +67,16 @@ export default function ReadyToSendSMS({SendingData}) {
       SetArrayValue([]);
     }
   }
+  const handleRefresh = () => {
+    window.location.reload();
+  };
   const list = (anchor) => (
     <Box className={`${Style.DrawerCenter} min-h-screen`}  style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
         <ToastContainer className={Style.toastDiv}/>
-
-        <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll"}}>
+        <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+        </div>
+        <div className='w-10/12 m-auto flex items-center min-h-screen flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll"}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
               <div className='w-full px-4 py-2 flex gap-4 items-center'>

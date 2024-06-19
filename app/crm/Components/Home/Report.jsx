@@ -108,6 +108,9 @@ export default function ReportLeftDrawer() {
     FetchCustomerData();
   },[])
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -120,6 +123,9 @@ export default function ReportLeftDrawer() {
   const list = (anchor) => (
 
     <Box className={`${Style.DrawerCenter} min-h-screen`} style={{backgroundColor:"var(--bg)"}} sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : '100vw' }} role="presentation">
+        <div  onClick={handleRefresh}>
+          <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
+        </div>
         <div className='w-10/12 m-auto flex items-center flex-col pt-4 gap-4 min-h-screen' style={{width:'70%',margin:"auto"}}>
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid #4F55C3"}}>
