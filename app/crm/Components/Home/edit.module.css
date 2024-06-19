@@ -6,13 +6,13 @@
 .NavSearchModel > div:nth-child(1){
     color: white;
     font-weight: bolder;
-    margin-left: 2em;
+    margin-left: 6px;
 }
 .NavSearchModel > div:nth-child(2){
     height: min-content;
 }
 .ForBackButton{
-    width: 50px;
+    /* width: 50px; */
     height: 50px;
     border-radius: 50%;
     display: flex;
@@ -76,7 +76,7 @@
   }
   .inputcontainer {
     position: relative;
-    margin-right: 5vw;
+    margin-right: 2vw;
   }
   .inputcontainer .input {
     width: 100%;
@@ -310,23 +310,23 @@
   
   .customTableCell {
     display: table-cell;
-    padding: 0px 20px;
+    padding: 6px 20px;
     border-bottom: 1px solid var(--blue);
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .customTableCell1{
     display: table-cell;
     padding: 10px 20px;
     text-align: center;
-    font-size: 16px; 
+    font-size: 14px; 
   }
 
   .customTableCell2{
     display: table-cell;
     text-align: center;
-    font-size: 16px; 
+    font-size: 14px; 
   }
   
   .customTableHeader .customTableCell {
@@ -371,6 +371,7 @@
     padding: 8px;
     flex: 1;
     text-align: center;
+    font-size: 14px;
   }
   
   .tableHeaderCell {

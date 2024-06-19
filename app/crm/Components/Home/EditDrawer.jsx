@@ -80,7 +80,7 @@ export default function EditLeftDrawer() {
         <div  onClick={handleRefresh}>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
         </div>
-        <div className='w-10/12 m-auto flex flex-col pt-4 gap-4 min-h-screen' style={{width:'80%',margin:"auto"}}>
+        <div className='w-10/12 m-auto flex flex-col pt-4 gap-4 min-h-screen' style={{width:'60em',margin:"auto"}}>
 
             {/* Header */}
             <div className='flex w-full items-center justify-between py-2'>
@@ -91,12 +91,12 @@ export default function EditLeftDrawer() {
                 </div>
                 <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers</div>
               </div>
-              <div className="flex items-center gap-4" style={{border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+              <div className="flex items-center gap-4" style={{minWidth:'fit-content',border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
             </div>
 
             {/* Search */}
             <div className={`${Style.NavSearchModel} mb-4`}>
-                <div className={Style.SearchModel}>
+                <div className={Style.SearchModel} style={{width:"68%"}}>
                     <input type="text" placeholder="Search" onChange={(e)=>{SetData(searchFun(e.target.value,ConstData))}}/>
                     <div className={Style.searchBtn}>Search</div>
                 </div>
@@ -134,10 +134,11 @@ export default function EditLeftDrawer() {
                     <div className={Style.customTh}>#</div>
                     <div>
                       <div>
-                        <div className={Style.customTh} style={{minWidth:"10em"}}>Mobile</div>
-                        <div className={Style.customTh} style={{width:"20em"}} >Mail</div>
-                        <div className={Style.customTh} style={{minWidth:"10em"}}>Location</div>
-                        <div className={Style.customTh} style={{minWidth:"10em"}}>Balance</div>
+                        <div className={Style.customTh} style={{minWidth:"10em"}}>Customer Name</div>
+                        <div className={Style.customTh} style={{minWidth:"8em"}}>Mobile</div>
+                        <div className={Style.customTh} style={{width:"16em"}} >Mail</div>
+                        <div className={Style.customTh} style={{minWidth:"8em"}}>Location</div>
+                        <div className={Style.customTh} style={{minWidth:"8em"}}>Balance</div>
                       </div>
                     </div>
                   </div>

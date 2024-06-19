@@ -212,7 +212,7 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
       <div  onClick={handleRefresh}>
           <img src="assets/homeicon.svg" alt="Home" className={Style.homeIcon} />
       </div>
-      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'80%',margin:"auto",overflow:"scroll !important"}}>
+      <div className='min-h-screen overflow-scroll w-10/12 m-auto flex items-center flex-col pt-4 gap-4' style={{width:'70em',margin:"auto",overflow:"scroll !important"}}>
         
         {/* Header */}
         <div className='flex w-full items-center justify-between py-2' style={{borderBottom:"1px solid var(--blue)"}}>
@@ -251,7 +251,7 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         {/* DateCon */}
         <div className='pl-8 my-4 flex items-center justify-between w-full'>
           <div style={{color:"var(--blue)",fontSize:"24px"}}>Event</div>
-          <div className='flex gap-6'>
+          <div className='flex gap-6 pr-10'>
             {/* <div onClick={()=>{downloadCSVFunction()}} style={{cursor:"pointer",border:"1px solid var(--pink)",borderRadius:"5px",padding:"4px 2em",fontSize:"14px",backgroundColor:"var(--bg)",color:"var(--pink)",outline:"none"}}> Download </div> */}
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <button 
@@ -280,12 +280,12 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         </div>
         <div className='pl-8 my-4 flex items-center w-full'>  
           <div>
-              <div className='flex gap-4'>
+              <div className='flex'>
                 <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">Start Date</label><DatePickerIcon setValue={SetStartDate}/></div></div>
-                <div><div className={Style.inputcontainer}><label className={Style.label} for="inputField">End Date</label><DatePickerIcon setValue={SetEndDate}/></div></div>
+                <div><div className={Style.inputcontainer} style={{marginRight:"4em"}}><label className={Style.label} for="inputField">End Date</label><DatePickerIcon setValue={SetEndDate}/></div></div>
               </div>
           </div>
-          <div className={`flex gap-2 bg-white items-center`} style={{borderRadius:"5px",padding:"4px 8px",minWidth:'fit-content',boxShadow:"0px 2px 2px 0px rgba(0, 0, 0, 0.25)"}}>
+          <div className={`flex gap-2 bg-white items-center`} style={{width:"45%",borderRadius:"5px",padding:"4px 8px",minWidth:'fit-content',boxShadow:"0px 2px 2px 0px rgba(0, 0, 0, 0.25)"}}>
             <div><img src="/assets/srh.svg" alt="Search" style={{width:"18px",height:"18px",outline:"none",border:"none"}}/></div>
             <div className='w-full'>
               <input type="text" placeholder="Search" className='w-full outline-none border-none' onChange={(e)=>{SetData(searchFun(e.target.value,ConstData))}}/>
@@ -294,16 +294,16 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
         </div>
 
         {/* Table */}
-        <div className={Style.customTableContainer} style={{width:"90%",overflow:"scroll",backgroundColor:"white",borderRadius:"10px"}}>
+        <div className={Style.customTableContainer} style={{width:"94%",overflow:"scroll",backgroundColor:"white",borderRadius:"10px"}}>
           <div className={Style.customTable}>
             <div className={Style.customTableHeader}>
               <div className={Style.customTableRow}>
                 <div style={{borderBottom:"1px solid var(--blue)",padding:"0px 20px",fontWeight:"bold"}}>
-                  <div className={Style.customTableCell1} style={{width:"10em"}}>Event Name</div>
-                  <div className={Style.customTableCell1} style={{width:"10em"}}>Date</div>
-                  <div className={Style.customTableCell1} style={{width:"10em"}}>Full Amount</div>
-                  <div className={Style.customTableCell1} style={{width:"10em"}}>Paid Amount</div>
-                  <div className={Style.customTableCell1} style={{width:"10em"}}>Balance</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Event Name</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Date</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Full Amount</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Paid Amount</div>
+                  <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Balance</div>
                 </div>
                 <div className={Style.customTableCell}>Status</div>
               </div>
@@ -335,10 +335,11 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
       {['bottom'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)} className='cursor-pointer'>
-            <div className={Style.customTd} style={{minWidth:"10em"}}>{Mobile}</div>
-            <div className={Style.customTd} style={{minWidth:"20em"}}>{Email_ID}</div>
-            <div className={Style.customTd} style={{minWidth:"10em"}}>{Location}</div>
-            <div className={Style.customTd} style={{minWidth:"10em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
+            <div className={Style.customTd} style={{minWidth:"10em"}}>{name}</div>
+            <div className={Style.customTd} style={{minWidth:"8em"}}>{Mobile}</div>
+            <div className={Style.customTd} style={{minWidth:"16em"}}>{Email_ID}</div>
+            <div className={Style.customTd} style={{minWidth:"8em"}}>{Location}</div>
+            <div className={Style.customTd} style={{minWidth:"8em"}}>{Balance.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
           </div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} transitionDuration={{ appear: 1000, enter: 1000, exit: 1000 }}>
             {list(anchor)}

@@ -97,6 +97,7 @@ h3 {
 }
 
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root input {
-  width: 9em !important;
+  width: 14em !important;
   color: var(--black) !important;
+  font-size: 13px !important;
 }

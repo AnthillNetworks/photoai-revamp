@@ -150,7 +150,7 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
         </div>
         
         {/* Table */}
-        <div className={Style.tableContainer} style={{width:"90%",backgroundColor:"white",borderRadius:"10px"}}>
+        <div className={Style.tableContainer} style={{width:"40em",backgroundColor:"white",borderRadius:"10px",marginLeft:"2em",alignSelf:"self-start",padding:"0 0 4px 0"}}>
           <div className={`${Style.table} bg-white`}>
             <div className={Style.tableHeader}>
               <div className={Style.tableRow}>
@@ -170,7 +170,8 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
                       {(+item.Advance).toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}
                     </div>
                     <div style={{flex:".25"}}>
-                      <DeleteIcon className={Style.deleteIcon} style={{ cursor: 'pointer' }} onClick={() => { HandelDelete(index) }} />
+                      <img src="/assets/delete.svg" alt="Del" style={{ cursor: 'pointer' }} onClick={() => { HandelDelete(index) }}/>
+                      {/* <DeleteIcon className={Style.deleteIcon} style={{ cursor: 'pointer' }} onClick={() => { HandelDelete(index) }} /> */}
                     </div>
                   </div>
                 </>
@@ -190,17 +191,17 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)} style={{cursor:'pointer'}}>
 
-            <div className={verbose ? Style.customTableCell2 : Style.customTableCell1 } style={{width:"10em"}}>
+            <div className={verbose ? Style.customTableCell2 : Style.customTableCell1 } style={{minWidth:"10em"}}>
               {name.split('-')[1].split('_').join(' ')}
             </div>
-            <div className={Style.customTableCell1} style={{width:"10em"}}>{EventDate}</div>
-            <div className={Style.customTableCell1} style={{width:"10em"}}>
+            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>{EventDate}</div>
+            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
               {Full_Amount}
             </div>
-            <div className={Style.customTableCell1} style={{width:"10em"}}>
+            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
               {AdvanceAmount}
             </div>
-            <div className={Style.customTableCell1} style={{width:"10em"}}>
+            <div className={Style.customTableCell1} style={{minWidth:"10em"}}>
               {Bal}
             </div>
 
