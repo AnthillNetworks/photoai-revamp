@@ -9,7 +9,8 @@ import UploadImageOrVideo from './uploaddrawer';
 import { CreateCustomerGrettingsFuntion, GetCustomerGrettingsFuntion } from './AllFunctions';
 import ReadyToSendSMS from './RedyToSend';
 import Image from 'next/image';
-export default function GreatingsLeftDrawer() {
+import TemporaryDrawer_ from './UserProfile';
+export default function GreatingsLeftDrawer(UserID) {
   const [Data,DataValue] = React.useState([]);
   const [ConstData,ConstDataValue] = React.useState([]);
   const [IfIsOk,SetIfIsOk] = React.useState(false);
@@ -68,7 +69,8 @@ export default function GreatingsLeftDrawer() {
                 </div>
                 <div style={{color:"var(--blue)",fontSize:"24px"}}>Send Greetings</div>
               </div>
-              <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+              {/* <div className="flex items-center gap-4 w-fit" style={{border:"1px solid #D8D8D8",borderRadius:'5px',minWidth:"fit-content"}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div> */}
+              <div><TemporaryDrawer_ UserID={UserID}/></div>
             </div>  
 
             {/* Desc */}

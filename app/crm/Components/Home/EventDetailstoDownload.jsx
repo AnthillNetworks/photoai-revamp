@@ -15,7 +15,8 @@ import sendsmscrm from '../../SendSMS';
 import EventDetailsSendBtn from './EventDetailsSendBtn';
 import Image from 'next/image';
 import GetCustomerDetailsByName from './GetCustomerDetailsByName';
-export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID,verbose})=>{
+import TemporaryDrawer_ from './UserProfile';
+export const TableCkeckBox = ({UserID,item,ConstCheckedData,cusname,SetConstCheckedData,OnStatusChange,Mobile,Location,Email_ID,verbose})=>{
   const [StatusValue,SetStatusValue] = React.useState(item.Status);
   let AdvanceAmount = 0;
   item.Advance_Payment.map((it)=>{
@@ -31,6 +32,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
     AdvanceAmount={AdvanceAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
     Bal={(item.Full_Amount - AdvanceAmount).toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}
     verbose={verbose}
+    UserID={UserID}
     />
   </div>
 
@@ -53,7 +55,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
       <option value="Delivered" style={ColorAndBGcolor('Delivered')}>Delivered</option>
     </select>
   </div>
-  <div className={Style.customTableCell} style={{border: 'none', backgroundColor:"var(--white)"}}>
+  <div className={Style.customTableCell} style={{backgroundColor:"var(--white)"}}>
     <img
       className={Style.customImage}
       style={{width: '20px', cursor: 'pointer'}}
@@ -65,7 +67,7 @@ export const TableCkeckBox = ({item,ConstCheckedData,cusname,SetConstCheckedData
 </div>
 }
 
-export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID,Balance,verbose}) {
+export default function EventDetailsToDownload({UserID,id,name,Mobile,Location,Email_ID,Balance,verbose}) {
     const [Data,SetData] = React.useState([]);
     const [ConstData,SetConstData] = React.useState([]);
     const [csvData,SetcsvData] = React.useState([]);
@@ -223,7 +225,8 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
             </div>
             <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers Details</div>
           </div>
-          <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div>
+          {/* <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div> */}
+          <div><TemporaryDrawer_ UserID={UserID}/></div>
         </div>
 
         {/* Details */}
@@ -305,7 +308,8 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
                   <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Paid Amount</div>
                   <div className={Style.customTableCell1} style={{minWidth:"10em"}}>Balance</div>
                 </div>
-                <div className={Style.customTableCell}>Status</div>
+                <div className={Style.customTableCell} >Status</div>
+                <div className={Style.customTableCell}></div>
               </div>
             </div>
             <div className={Style.customTableBody}>
@@ -321,6 +325,7 @@ export default function EventDetailsToDownload({id,name,Mobile,Location,Email_ID
                   Location={Location}
                   Email_ID={Email_ID}
                   verbose={verbose}
+                  UserID={UserID}
                 />
               ))}
             </div>

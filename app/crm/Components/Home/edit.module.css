@@ -211,6 +211,7 @@
   
   .customThead {
     display: table-header-group;
+    /* border-bottom: 1px solid var(--blue); */
   }
   
   .customTbody {
@@ -219,13 +220,14 @@
   
   .customTr {
     display: table-row;
+    /* border-bottom: 1px solid #9AC5F4; */
   }
   
   .customTh, .customTd {
     display: table-cell;
     padding: 8px 16px;
     text-align: center;
-    border-bottom: 1px solid #9AC5F4;
+    /* border-bottom: 1px solid #9AC5F4; */
   }
   
   .customTh {

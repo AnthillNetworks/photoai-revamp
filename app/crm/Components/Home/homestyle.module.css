@@ -164,6 +164,37 @@
   cursor: pointer;
 }
 
+.ForBackButton{
+  /* width: 50px; */
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.DrawerCenter{
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  overflow: scroll;
+}
+.profile{
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.inputDiv{
+  border: 1px solid var(--blue);
+  outline: none;
+  color: black;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 90%;
+  border-radius: 4px;
+  background-color: var(--white);
+}
+
   @media screen and (min-width: 0px) and (max-width: 600px) {
     .MainContent{
       justify-content: flex-start;

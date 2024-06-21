@@ -14,6 +14,8 @@ import GreatingsLeftDrawer from './GreatingsDrawer';
 import ReportLeftDrawer from './Report';
 import AddPayment from './AddPayment';
 import Image from 'next/image';
+import TemporaryDrawer_ from './UserProfile';
+
 export default function HomePage({UserID}) {
     const [Array,ArrayValue] = useState([]);
     const [TodayDate,TodayDateValue] = useState(0);
@@ -81,7 +83,7 @@ export default function HomePage({UserID}) {
                 <div><Image src={UsereInfo?.Logo||''} alt='Logo' width={100} height={100} style={{width:'100px',borderRadius:'5px'}}/></div>
                 {/* <div className={Styles.JustForFUN}><Image width={100} height={100} style={{width: '60px',height:'auto'}} src={!AddOpen?'/svg/AddCrm.svg':'/svg/CrossCrm.svg'} alt="search" onClick={()=>{!AddOpen?AddOpenValue(true):AddOpenValue(false)}}/></div> */}
                 {AddOpen?<div className={Styles.JustForFUN} style={{marginTop:'20px',height:'30svh',justifyContent:'space-around'}}>
-                    <EditLeftDrawer/>
+                    <EditLeftDrawer UserID={UserID}/>
                     <Link href="/">
                         <div className={`flex gap-2`} style={{cursor:"pointer"}}>
                             <div
@@ -93,8 +95,8 @@ export default function HomePage({UserID}) {
                             </div>
                         </div>
                     </Link>
-                    <GreatingsLeftDrawer/>
-                    <ReportLeftDrawer/>
+                    <GreatingsLeftDrawer UserID={UserID}/>
+                    <ReportLeftDrawer UserID={UserID}/>
                 </div>:<></>}
             </div>
             <div className={Styles.MainContent} style={{display:"flex",flexDirection:"column",width:'100%'}}>
@@ -125,7 +127,8 @@ export default function HomePage({UserID}) {
                             </select>
                             <div onClick={handleNextMonth}><ArrowRightIcon color="primary" style={{fontSize:"30px",color:'black',cursor:'pointer'}}/></div>
                     </div>
-                    <div><TemporaryDrawer UserID={UserID}/></div>
+                    <div><TemporaryDrawer_ UserID={UserID}/></div>
+                    
                 </div>
                 <div className='flex gap-6 items-center w-full justify-end mb-4'>
                     <div className='flex gap-2 items-center text-sm'> <div style={{width:"12px",height:"12px",borderRadius:"50%",backgroundColor:"#C870E0",color:"#000"}}></div>Lead</div>

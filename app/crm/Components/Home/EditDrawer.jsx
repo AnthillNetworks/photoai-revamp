@@ -11,7 +11,8 @@ import Confirm from './confirm';
 import UpdateCustomer from './UpdateCustomer';
 import Image from 'next/image';
 import Link from 'next/link';
-export default function EditLeftDrawer() {
+import TemporaryDrawer_ from './UserProfile';
+export default function EditLeftDrawer(UserID) {
   const [Data,SetData] = React.useState([]);
   const [ConstData,SetConstData] = React.useState([]);
   const [ConstCheckedData,SetConstCheckedData] = React.useState(null);
@@ -91,7 +92,8 @@ export default function EditLeftDrawer() {
                 </div>
                 <div style={{color:"var(--blue)",fontSize:"24px"}}>Customers</div>
               </div>
-              <div className="flex items-center gap-4" style={{minWidth:'fit-content',border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div>
+              {/* <div className="flex items-center gap-4" style={{minWidth:'fit-content',border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold">Studio name</div></div> */}
+              <div><TemporaryDrawer_ UserID={UserID}/></div>
             </div>
 
             {/* Search */}
@@ -128,12 +130,12 @@ export default function EditLeftDrawer() {
             </div>
 
             <div className={Style.TableTag} style={{maxHeight: "60vh", overflow: "scroll" }}>
-              <div className={Style.customTable} style={{width:"fit-content",backgroundColor:"var(--white)",padding:"1em 2em",borderRadius:"10px"}}>
+              <div className={Style.customTable} style={{width:"fit-content",backgroundColor:"var(--white)",borderRadius:"10px"}}>
                 <div className={Style.customThead}>
                   <div className={Style.customTr}>
-                    <div className={Style.customTh}>#</div>
+                    <div className={Style.customTh} style={{borderBottom:"1px solid #9AC5F4"}}>#</div>
                     <div>
-                      <div>
+                      <div style={{borderBottom:"1px solid #9AC5F4"}}>
                         <div className={Style.customTh} style={{minWidth:"10em"}}>Customer Name</div>
                         <div className={Style.customTh} style={{minWidth:"8em"}}>Mobile</div>
                         <div className={Style.customTh} style={{width:"18em"}} >Mail</div>
@@ -147,7 +149,7 @@ export default function EditLeftDrawer() {
                   {Data.map((item, index) => {
                     return (
                       <div className={`${Style.customTr} flex`} key={index}>
-                        <div className={Style.customTd}>
+                        <div className={Style.customTd} style={{borderBottom:"1px solid #9AC5F4"}}>
                           <img
                             style={{ width: '20px', cursor: 'pointer' }}
                             onClick={() => {
@@ -161,10 +163,10 @@ export default function EditLeftDrawer() {
                             alt=""
                           />
                         </div>
-                        <div className='flex gap-5'>
-                          <EventDetailsToDownload id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID} Balance={item.Balance} verbose={false}/>
+                        <div className='flex gap-5 items-center' style={{borderBottom:"1px solid #9AC5F4"}}>
+                          <EventDetailsToDownload UserID={UserID} id={item.Customer_ID} name={item.Customer_Name} Mobile={item.Mobile} Location={item.Location} Email_ID={item.Email_ID} Balance={item.Balance} verbose={false}/>
                           <div>
-                            <button className={Style.searchBtn} style={{padding:"4px 16px"}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
+                            <button className={Style.searchBtn} style={{padding:"4px 16px",margin:'0 2em 0 0'}}><Confirm ConstCheckedData={ConstCheckedData}/></button>
                           </div>
                         </div>
                       </div>

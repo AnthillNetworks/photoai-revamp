@@ -10,7 +10,8 @@ import downloadCSV,{downloadEXCEL,downloadPDF,searchFun} from './DownloadCSV';
 import { sendsmscrmofcustomersetelement } from '../../SendSMS';
 import PaymentUpdateSendBtn from './PaymentUpdateSendBtn';
 import Image from 'next/image';
-export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstCheckedData,SetConstCheckedData,OnOnStatusChange,Location,Email_ID,Full_Amount,AdvanceAmount,Bal,verbose}) {
+import TemporaryDrawer_ from './UserProfile';
+export default function AddPayment({UserID,uuid,name,cusname,Mobile,EventDate,ConstCheckedData,SetConstCheckedData,OnOnStatusChange,Location,Email_ID,Full_Amount,AdvanceAmount,Bal,verbose}) {
   const [Data,DataValue] = React.useState([]);
   const [total,Settotal] = React.useState(0);
   const [totalAmount,settotalAmount] = React.useState(0);
@@ -99,7 +100,8 @@ export default function AddPayment({uuid,name,cusname,Mobile,EventDate,ConstChec
             </div>
             <div style={{color:"var(--blue)",fontSize:"24px"}}>Event Details</div>
           </div>
-          <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div>
+          {/* <div className="flex items-center gap-4" style={{minWidth:"fit-content",border:"1px solid #D8D8D8",borderRadius:'5px'}}><Image src="/assets/profile.svg" alt="Logo" width={100} height={100} className={Style.profile} /><div className="pr-6 text-sm font-bold w-fit">Studio name</div></div> */}
+          <div><TemporaryDrawer_ UserID={UserID}/></div>
         </div>
 
         {/* Details */}
