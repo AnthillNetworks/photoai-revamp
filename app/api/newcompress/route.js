@@ -1,13 +1,14 @@
 import sharp from 'sharp';
 import { NextResponse } from 'next/server';
 
-export const config = {
-  api: {
-      bodyParser: {
-          sizeLimit: '20mb' // Set desired value here
-      }
-  }
-}
+// export const config = {
+//   api: {
+//       bodyParser: {
+//           sizeLimit: '20mb' // Set desired value here
+//       }
+//   }
+// }
+
 
 export const POST = async (req, res) => {
   const formData = await req.formData();
