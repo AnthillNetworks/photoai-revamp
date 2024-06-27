@@ -117,7 +117,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
     console.log(selectedOption,"Sel")
     if (selectedOption) {
       if (id === "uploadFolder") {
-        if ( allFolders.length <= 0 ) {
+        if ( allFolders == null ) {
           setsearchPage(false);
           setCreateNew(true);
         }
@@ -206,7 +206,6 @@ export default function Search({ AllEventData, SuperAdmin }) {
   };
 
   const UploadImages = async (e) => {
-    console.log(selectedFiles.length);
     LoaderStatsValue(true)
     e.preventDefault();
     uploadstatusvideo(true);
@@ -225,78 +224,121 @@ export default function Search({ AllEventData, SuperAdmin }) {
       useWebWorker: true,
     };
 
+    const formData = new FormData();
     for (let i = 0; i < upload.length; i++) {
-      if (UploadedArray.includes(upload[i].name)) {
-        const per = ((i + 1) / upload.length) * 100;
-        totaluploadedvalue(i + 1);
-        percentagevalue(Math.ceil(per));
-        continue; // Skip already uploaded images
-      }
-
-      let retries = 0;
-      let success = false;
-      while (!success && retries < 3) {
-        // Retry at most 3 times
-        try {
-          const startTime = Date.now();
-          var Compresedimage = upload[i];
-          if (upload[i].size / (1024 * 1024) > 1) {
-            Compresedimage = await imageCompression(upload[i], options);
-          }
-          const uniqueFileName = new Date()
-            .toISOString()
-            .replace(/[-:.]/g, "")
-            .replace("T", "_");
-          const uploadCommand = new PutObjectCommand({
-            Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-            Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
-            Body: Compresedimage,
-            ACL: "public-read",
-          });
-          const respo = await s3Client.send(uploadCommand);
-          if (respo.$metadata.httpStatusCode == 200) {
-            const uploadd = new PutObjectCommand({
-              Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-              Key: `${month}/photographers_images/${selectedFolder}/${
-                month + uniqueFileName
-              }.jpg`,
-              Body: upload[i],
-              ACL: "public-read",
-            });
-            const response = await s3Client.send(uploadd);
-            if (response.$metadata.httpStatusCode == 200) {
-              UploadedArray.push(upload[i].name);
-              const uploadJaonPar = {
-                Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-                Key: `${month}/Uploaded_Images.json`,
-                Body: JSON.stringify(UploadedArray),
-                ContentType: "application/json",
-                ACL: "public-read",
-              };
-              await s3Client.send(new PutObjectCommand(uploadJaonPar));
-              const per = ((i + 1) / upload.length) * 100;
-              totaluploadedvalue(i + 1);
-              percentagevalue(Math.ceil(per));
-              success = true; // Mark success if the upload is successful
-            }
-          }
-        } catch (error) {
-          console.error("Error occurred during upload:", error);
-          // Retry after 1 minute
-          await new Promise((resolve) => setTimeout(resolve, 180000));
-          retries++;
-        }
-      }
-
-      if (!success) {
-        console.error(
-          "Upload failed after retrying multiple times:",
-          upload[i].name
-        );
-        // Handle failed upload here
-        // You might want to log or handle failed uploads differently
-      }
+      formData.append('files', upload[i]);
     }
+    console.log(upload[0])
+
+    formData.append("file", upload[0]);
+
+    const res = await fetch("/api/newcompress", {
+      method: "POST",
+      body: formData,
+    })
+      // .then(response => response.json())
+      // .then(data => console.log(data))
+      // .catch(error => console.error(error));
+
+    const data = await response.json();
+
+    if (response.status === 201) {
+      console.log(data); 
+      const compressedBase64 = data.compressedImage;
+      const byteCharacters = atob(compressedBase64);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const compressedImageBlob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+      const uniqueFileName = new Date()
+        .toISOString()
+        .replace(/[-:.]/g, "")
+        .replace("T", "_");
+      const uploadCommand = new PutObjectCommand({
+        Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+        Key: `${month}/NEW_COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
+        Body: compressedImageBlob,
+        ACL: "public-read",
+      });
+      const respo = await s3Client.send(uploadCommand);
+      console.log(respo.$metadata.httpStatusCode,"Status")
+    }
+
+    // for (let i = 0; i < upload.length; i++) {
+    //   if (UploadedArray.includes(upload[i].name)) {
+    //     const per = ((i + 1) / upload.length) * 100;
+    //     totaluploadedvalue(i + 1);
+    //     percentagevalue(Math.ceil(per));
+    //     continue;
+    //   }
+
+    //   let retries = 0;
+    //   let success = false;
+    //   while (!success && retries < 3) {
+    //     try {
+    //       const startTime = Date.now();
+    //       var Compresedimage = upload[i];
+    //       if (upload[i].size / (1024 * 1024) > 1) {
+    //         Compresedimage = await imageCompression(upload[i], options);
+    //       }
+    //       const uniqueFileName = new Date()
+    //         .toISOString()
+    //         .replace(/[-:.]/g, "")
+    //         .replace("T", "_");
+    //       const uploadCommand = new PutObjectCommand({
+    //         Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+    //         Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
+    //         Body: Compresedimage,
+    //         ACL: "public-read",
+    //       });
+    //       const respo = await s3Client.send(uploadCommand);
+    //       if (respo.$metadata.httpStatusCode == 200) {
+    //         const uploadd = new PutObjectCommand({
+    //           Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+    //           Key: `${month}/photographers_images/${selectedFolder}/${
+    //             month + uniqueFileName
+    //           }.jpg`,
+    //           Body: upload[i],
+    //           ACL: "public-read",
+    //         });
+    //         const response = await s3Client.send(uploadd);
+    //         if (response.$metadata.httpStatusCode == 200) {
+    //           UploadedArray.push(upload[i].name);
+    //           const uploadJaonPar = {
+    //             Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+    //             Key: `${month}/Uploaded_Images.json`,
+    //             Body: JSON.stringify(UploadedArray),
+    //             ContentType: "application/json",
+    //             ACL: "public-read",
+    //           };
+    //           await s3Client.send(new PutObjectCommand(uploadJaonPar));
+    //           const per = ((i + 1) / upload.length) * 100;
+    //           totaluploadedvalue(i + 1);
+    //           percentagevalue(Math.ceil(per));
+    //           success = true; // Mark success if the upload is successful
+    //         }
+    //       }
+    //     } catch (error) {
+    //       console.error("Error occurred during upload:", error);
+    //       // Retry after 1 minute
+    //       await new Promise((resolve) => setTimeout(resolve, 180000));
+    //       retries++;
+    //     }
+    //   }
+
+    //   if (!success) {
+    //     console.error(
+    //       "Upload failed after retrying multiple times:",
+    //       upload[i].name
+    //     );
+    //     // Handle failed upload here
+    //     // You might want to log or handle failed uploads differently
+    //   }
+    // }
+
     // setIsLoading(false);
     inputboxvalue(false);
     uploadvalue(null);

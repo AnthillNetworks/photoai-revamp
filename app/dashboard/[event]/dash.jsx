@@ -116,6 +116,7 @@ export default function Dashboard({ event}){
 
     const FetchImagesByFolderName = async(continuationtoken,key,firsttime)=>{
       console.log(continuationtoken,key,firsttime,key)
+      console.log(key,"------")
       const listParams = {
         Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
         MaxKeys: 10,
