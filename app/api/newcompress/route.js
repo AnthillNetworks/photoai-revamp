@@ -3,12 +3,15 @@ import { NextResponse } from 'next/server';
 
 // export const config = {
 //   api: {
-//       bodyParser: {
-//           sizeLimit: '20mb' // Set desired value here
-//       }
-//   }
+//     bodyParser: {
+//       sizeLimit: '100mb',
+//     },
+//   },
+//   // Specifies the maximum allowed duration for this function to execute (in seconds)
+//   maxDuration: 5000,
 // }
 
+export const maxDuration = 5000
 
 export const POST = async (req, res) => {
   const formData = await req.formData();
