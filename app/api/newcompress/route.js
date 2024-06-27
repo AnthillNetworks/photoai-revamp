@@ -11,7 +11,7 @@ import { NextResponse } from 'next/server';
 //   maxDuration: 5000,
 // }
 
-export const maxDuration = 5000
+export const maxDuration = 60
 
 export const POST = async (req, res) => {
   const formData = await req.formData();
