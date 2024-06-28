@@ -4,12 +4,12 @@ import { NextResponse } from 'next/server';
 // export const config = {
 //   api: {
 //     bodyParser: {
-//       sizeLimit: '100mb',
+//       sizeLimit: '100mb', // Set desired value here
 //     },
 //   },
-//   // Specifies the maximum allowed duration for this function to execute (in seconds)
-//   maxDuration: 5000,
-// }
+//   // runtime: 'nodejs', // Specify the runtime environment if needed
+//   maxDuration: 5000, // Specifies the maximum allowed duration for this function to execute (in milliseconds)
+// };
 
 export const dynamic = 'auto'
 export const dynamicParams = true
