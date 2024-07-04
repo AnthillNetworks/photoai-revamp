@@ -245,7 +245,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
       });
 
       try {
-        const response = await axios.post('https://13.233.101.156:8080/upload', formData, {
+        const response = await axios.post('https://googledriveapinode-1.onrender.com/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
