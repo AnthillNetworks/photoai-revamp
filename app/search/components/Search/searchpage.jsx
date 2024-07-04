@@ -20,7 +20,7 @@ import { Line } from "rc-progress";
 import { FetchUploadedData } from "./get_uploadeds";
 import Loader from "@/app/loader/page";
 import { Dialog,DialogContent } from '@mui/material';
-
+import axios from 'axios'
 import { folder } from "jszip";
 
 
@@ -205,6 +205,9 @@ export default function Search({ AllEventData, SuperAdmin }) {
     inputboxvalue(true);
   };
 
+  const fileInputRef = useRef(null);
+  const [uploadStatus, setUploadStatus] = useState([]);
+
   const UploadImages = async (e) => {
     LoaderStatsValue(true)
     e.preventDefault();
@@ -224,120 +227,111 @@ export default function Search({ AllEventData, SuperAdmin }) {
       useWebWorker: true,
     };
 
-    const formData = new FormData();
-    for (let i = 0; i < upload.length; i++) {
-      formData.append('files', upload[i]);
-    }
-    console.log(upload[0])
-
-    formData.append("file", upload[0]);
-
-    const res = await fetch("/api/newcompress", {
-      method: "POST",
-      body: formData,
-    })
-      // .then(response => response.json())
-      // .then(data => console.log(data))
-      // .catch(error => console.error(error));
-
-    const data = await response.json();
-
-    if (response.status === 201) {
-      console.log(data); 
-      const compressedBase64 = data.compressedImage;
-      const byteCharacters = atob(compressedBase64);
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      const compressedImageBlob = new Blob([byteArray], { type: 'image/jpeg' });
-      
-      const uniqueFileName = new Date()
-        .toISOString()
-        .replace(/[-:.]/g, "")
-        .replace("T", "_");
-      const uploadCommand = new PutObjectCommand({
-        Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-        Key: `${month}/NEW_COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
-        Body: compressedImageBlob,
-        ACL: "public-read",
-      });
-      const respo = await s3Client.send(uploadCommand);
-      console.log(respo.$metadata.httpStatusCode,"Status")
-    }
-
+    // const formData = new FormData();
     // for (let i = 0; i < upload.length; i++) {
-    //   if (UploadedArray.includes(upload[i].name)) {
-    //     const per = ((i + 1) / upload.length) * 100;
-    //     totaluploadedvalue(i + 1);
-    //     percentagevalue(Math.ceil(per));
-    //     continue;
-    //   }
-
-    //   let retries = 0;
-    //   let success = false;
-    //   while (!success && retries < 3) {
-    //     try {
-    //       const startTime = Date.now();
-    //       var Compresedimage = upload[i];
-    //       if (upload[i].size / (1024 * 1024) > 1) {
-    //         Compresedimage = await imageCompression(upload[i], options);
-    //       }
-    //       const uniqueFileName = new Date()
-    //         .toISOString()
-    //         .replace(/[-:.]/g, "")
-    //         .replace("T", "_");
-    //       const uploadCommand = new PutObjectCommand({
-    //         Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-    //         Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
-    //         Body: Compresedimage,
-    //         ACL: "public-read",
-    //       });
-    //       const respo = await s3Client.send(uploadCommand);
-    //       if (respo.$metadata.httpStatusCode == 200) {
-    //         const uploadd = new PutObjectCommand({
-    //           Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-    //           Key: `${month}/photographers_images/${selectedFolder}/${
-    //             month + uniqueFileName
-    //           }.jpg`,
-    //           Body: upload[i],
-    //           ACL: "public-read",
-    //         });
-    //         const response = await s3Client.send(uploadd);
-    //         if (response.$metadata.httpStatusCode == 200) {
-    //           UploadedArray.push(upload[i].name);
-    //           const uploadJaonPar = {
-    //             Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-    //             Key: `${month}/Uploaded_Images.json`,
-    //             Body: JSON.stringify(UploadedArray),
-    //             ContentType: "application/json",
-    //             ACL: "public-read",
-    //           };
-    //           await s3Client.send(new PutObjectCommand(uploadJaonPar));
-    //           const per = ((i + 1) / upload.length) * 100;
-    //           totaluploadedvalue(i + 1);
-    //           percentagevalue(Math.ceil(per));
-    //           success = true; // Mark success if the upload is successful
-    //         }
-    //       }
-    //     } catch (error) {
-    //       console.error("Error occurred during upload:", error);
-    //       // Retry after 1 minute
-    //       await new Promise((resolve) => setTimeout(resolve, 180000));
-    //       retries++;
-    //     }
-    //   }
-
-    //   if (!success) {
-    //     console.error(
-    //       "Upload failed after retrying multiple times:",
-    //       upload[i].name
-    //     );
-    //     // Handle failed upload here
-    //     // You might want to log or handle failed uploads differently
-    //   }
+    //   formData.append('files', upload[i]);
     // }
+
+    const files = Array.from(fileInputRef.current.files);
+    const batchSize = 10;
+    let results = [];
+
+    for (let i = 0; i < files.length; i += batchSize) {
+      const batch = files.slice(i, i + batchSize);
+
+      const formData = new FormData();
+      batch.forEach((file) => {
+        formData.append('files', file);
+      });
+
+      try {
+        const response = await axios.post('http://localhost:8080/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        results = results.concat(response.data);
+        setUploadStatus(prevStatus => [...prevStatus, ...response.data]);
+        console.log('Batch upload successful:', response.data);
+      } catch (error) {
+        console.error('Error uploading batch:', error);
+      }
+    }
+
+    console.log('All file uploads completed:', results);
+
+    for (let i = 0; i < upload.length; i++) {
+      if (UploadedArray.includes(upload[i].name)) {
+        const per = ((i + 1) / upload.length) * 100;
+        totaluploadedvalue(i + 1);
+        percentagevalue(Math.ceil(per));
+        continue;
+      }
+
+      let retries = 0;
+      let success = false;
+      while (!success && retries < 3) {
+        try {
+          const startTime = Date.now();
+          var Compresedimage = upload[i];
+          if (upload[i].size / (1024 * 1024) > 1) {
+            Compresedimage = await imageCompression(upload[i], options);
+          }
+          const uniqueFileName = new Date()
+            .toISOString()
+            .replace(/[-:.]/g, "")
+            .replace("T", "_");
+          const uploadCommand = new PutObjectCommand({
+            Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+            Key: `${month}/COMPRESS_IMAGES/${selectedFolder}/${month + uniqueFileName}.jpg`,
+            Body: Compresedimage,
+            ACL: "public-read",
+          });
+          const respo = await s3Client.send(uploadCommand);
+          if (respo.$metadata.httpStatusCode == 200) {
+            const uploadd = new PutObjectCommand({
+              Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+              Key: `${month}/photographers_images/${selectedFolder}/${
+                month + uniqueFileName
+              }.jpg`,
+              Body: upload[i],
+              ACL: "public-read",
+            });
+            const response = await s3Client.send(uploadd);
+            if (response.$metadata.httpStatusCode == 200) {
+              UploadedArray.push(upload[i].name);
+              const uploadJaonPar = {
+                Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
+                Key: `${month}/Uploaded_Images.json`,
+                Body: JSON.stringify(UploadedArray),
+                ContentType: "application/json",
+                ACL: "public-read",
+              };
+              await s3Client.send(new PutObjectCommand(uploadJaonPar));
+              const per = ((i + 1) / upload.length) * 100;
+              totaluploadedvalue(i + 1);
+              percentagevalue(Math.ceil(per));
+              success = true; // Mark success if the upload is successful
+            }
+          }
+        } catch (error) {
+          console.error("Error occurred during upload:", error);
+          // Retry after 1 minute
+          await new Promise((resolve) => setTimeout(resolve, 180000));
+          retries++;
+        }
+      }
+
+      if (!success) {
+        console.error(
+          "Upload failed after retrying multiple times:",
+          upload[i].name
+        );
+        // Handle failed upload here
+        // You might want to log or handle failed uploads differently
+      }
+    }
 
     // setIsLoading(false);
     inputboxvalue(false);
@@ -427,7 +421,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
         secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
       },
     });
-  
+
     console.log(upload.length)
     for (let i = 0; i < upload.length; i++) {
       let retries = 0;
@@ -659,14 +653,6 @@ export default function Search({ AllEventData, SuperAdmin }) {
                               <div className="text-black text-lg font-bold">Upload</div>
                               <div onClick={()=>{inputboxvalue(false)}} style={{cursor:"pointer",color:"var(--pink)"}}>&#x2716;</div>
                           </div>
-                          {/* <input type="file" name="Image_Files" accept=".Drag & drop files or Browsepg, .jpeg, .png" multiple required onChange={(e)=>{uploadvalue(e.target.files)}}/> */}
-                          
-                          {/* <div className="flex flex-col items-center justify-center px-4 py-6" style={{border:"1px dotted #384EB7",borderRadius:'10px'}}>
-                            <div><img src="/assets/upload.svg" alt="Upload Image" /></div>
-                            <div className="text-black">Drag & drop files or <span style={{color:"var(--blue)"}}>Browse</span></div>
-                            <div style={{fontSize:"12px",color:"#676767"}}>Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</div>
-                          </div> */}
-
                           <div className="flex flex-col items-center justify-center px-4 py-6" style={{ border: "1px dotted #384EB7", borderRadius: '10px' }}>
                             <label htmlFor="file-upload" className="flex flex-col items-center justify-center cursor-pointer">
                               <div><img src="/assets/upload.svg" alt="Upload Image" /></div>
@@ -679,6 +665,7 @@ export default function Search({ AllEventData, SuperAdmin }) {
                                 accept=".jpg, .jpeg, .png, .gif, .mp4, .pdf, .psd, .ai, .doc, .docx, .ppt, .pptx"
                                 multiple
                                 required
+                                ref={fileInputRef}
                                 onChange={(e) => { uploadvalue(e.target.files); setSelectedFiles(e); }}
                                 style={{ display: 'none' }}
                               />
@@ -698,19 +685,8 @@ export default function Search({ AllEventData, SuperAdmin }) {
                                       <div className={Styles.lineclass}>
                                         <Line percent={percentage} strokeWidth={3} strokeColor="#ec2265" trailColor="#ec2265"/>
                                       </div>
-                                      {/* <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div> */}
                                   </div>
                               </div>
-                                
-                              {/* <div className={Styles.UploadPercentage}>
-                                  <div className={Styles.UploadPercentagetext}>{percentage}% Uploaded ...</div>
-                                  <div>
-                                      <div className={Styles.lineclass}>
-                                        <Line percent={percentage} strokeWidth={3} strokeColor="#725aff" trailColor="#fbfcfd67"/>
-                                      </div>
-                                      <div className={Styles.UploadPercentagetext}>{`${tottaluploaded} /  ${upload.length}`}</div>
-                                  </div>
-                              </div> */}
                           </>:<></>}
                       </form>
                   </div>
